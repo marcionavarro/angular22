@@ -2,11 +2,12 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular22Tutorial": {
+    "angular22": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular22Tutorial:build:production"
+              "buildTarget": "angular22:build:production"
             },
             "development": {
-              "buildTarget": "angular22Tutorial:build:development"
+              "buildTarget": "angular22:build:development"
             }
           },
           "defaultConfiguration": "development"
