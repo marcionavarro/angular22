@@ -1,1 +1,65 @@
-<p>A vinculação de dados funciona!</p>
+<table>
+  <tr>
+    <td>
+      <input type="text" [(ngModel)]="productName" />
+    </td>
+    <td>
+      <select [(ngModel)]="productName">
+        <option>Mobile</option>
+        <option>Laptop</option>
+        <option>Headphone</option>
+        <option>Charger</option>
+      </select>
+    </td>
+    <td>
+      <input type="checkbox" [(ngModel)]="isProductActive" />
+    </td>
+    <td>isProductActive = > {{ isProductActive }}</td>
+  </tr>
+</table>
+
+<table style="width: 100%">
+  <tr>
+    <td>
+      {{ productName }}
+    </td>
+    <td>
+      <span>{{ productPrice }}</span>
+    </td>
+
+    <td>
+      <input type="text" value="{{ productName }}" />
+    </td>
+    <td>
+      <input type="text" [maxLength]="maxAllowedQuantity" />
+    </td>
+    <td>
+      <input type="text" [value]="productName" />
+    </td>
+    <td>
+      <input type="{{ myDynamicType }}" />
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <button (click)="showWelcomeText()">Mostrar boas vindas!</button>
+    </td>
+    <td>
+      <select (change)="onDropdownChange()">
+        <option value="">Mobile</option>
+        <option value="">Laptop</option>
+        <option value="">Headphone</option>
+        <option value="">Charger</option>
+      </select>
+    </td>
+  </tr>
+</table>
+
+<div
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeft()"
+  style="background-color: red; width: 100px; height: 100px; border-radius: 50px"
+></div>
