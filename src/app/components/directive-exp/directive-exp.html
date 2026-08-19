@@ -1,1 +1,54 @@
-<p>directive-exp works!</p>
+<div class="row">
+  <div class="col-3" [ngClass]="divClassName">
+    <div class="p-4">Div1</div>
+  </div>
+  <div class="col-3">
+    <div class="p-3" [ngClass]="isCheckActive == true ? 'bg-warning' : 'bg-primary'">Div 2</div>
+  </div>
+  <div class="col-3">
+    <input type="text" [(ngModel)]="num1" class="form-control" placeholder="Enter 5 char only" />
+    <h1 [ngClass]="num1.length > 5 ? 'text-danger' : 'text-success'">
+      {{ num1.length > 5 ? 'Text is invalid' : 'Text is valid' }}
+    </h1>
+  </div>
+  <div class="col-3">
+    <input type="text" [(ngModel)]="num1" class="form-control" placeholder="Enter 5 char only" />
+    <h1 [ngClass]="isTextValid ? 'text-danger' : 'text-success'">
+      {{ num1.length > 5 ? 'Text is invalid' : 'Text is valid' }}
+    </h1>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-3">
+    <button class="btn btn-success" (click)="addDiv1Class('bg-success')">Success</button>
+    <button class="btn btn-danger" (click)="addDiv1Class('bg-danger')">Danger</button>
+  </div>
+  <div class="col-3">
+    <input type="checkbox" [(ngModel)]="isCheckActive" /> - {{ isCheckActive }}
+  </div>
+  <div class="col-3">
+    <button (click)="checkCharLength()" class="btn btn-success">Check Length</button>
+  </div>
+</div>
+<hr />
+<hr />
+
+<div class="row">
+  <div class="col-3" [ngStyle]="{ 'background-color': inputColorValue }">
+    <div class="p-3">Div 3</div>
+  </div>
+  <div class="col-3">
+    <div [ngStyle]="div4Css">Div 4</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <input type="color" [(ngModel)]="inputColorValue" />
+  </div>
+  <div class="col-3">
+    <button (click)="changeType('circle')">Circle</button>
+    <button (click)="changeType('square')">Square</button>
+  </div>
+</div>
