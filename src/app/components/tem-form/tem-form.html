@@ -1,0 +1,113 @@
+<div class="row p-2">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-warning">Lista de Empresas</div>
+      <div class="card-body"></div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-warning">Nova Empresa</div>
+      <div class="card-body">
+        <form #form="ngForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="companyName" class="form-label">Nome da Empresa</label>
+              <input
+                type="text"
+                class="form-control"
+                #comName="ngModel"
+                [(ngModel)]="companyObj.companyName"
+                id="companyName"
+                name="companyName"
+                placeholder="Digite o nome da empresa"
+                required
+                minlength="5"
+              />
+              <div class="text-danger">
+                @if (comName.errors?.['required']) {
+                  <span>Este campo é obrigatório</span>
+                }
+                @if (comName.errors?.['minlength']) {
+                  <span>Mínimo de 5 caracteres</span>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="pinCode" class="form-label">Código PIN</label>
+              <input
+                type="text"
+                class="form-control"
+                #pinCode="ngModel"
+                (ngModelChange)="onPinchange()"
+                [(ngModel)]="companyObj.pinCode"
+                id="pinCode"
+                name="pinCode"
+                placeholder="Digite o código PIN"
+                required
+                minlength="6"
+              />
+              <div class="text-danger">
+                @if (pinCode.errors?.['required']) {
+                  <span>Este campo é obrigatório</span>
+                }
+                @if (pinCode.errors?.['minlength']) {
+                  <span>Mínimo de 6 caracteres</span>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="address" class="form-label">Endereço</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="companyObj.address"
+                id="address"
+                name="address"
+                placeholder="Digite o endereço"
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone</label>
+              <input
+                type="text"
+                class="form-control"
+                #phone="ngModel"
+                [(ngModel)]="companyObj.phone"
+                id="phone"
+                name="phone"
+                placeholder="Digite o telefone"
+                required
+                minlength="11"
+                maxlength="11"
+              />
+              <div class="text-danger">
+                @if (phone.errors?.['required']) {
+                  <span>Este campo é obrigatório</span>
+                }
+                @if (phone.errors?.['minlength']) {
+                  <span>Mínimo de 11 caracteres</span>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-4">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onSaveCompany(form)"
+              [disabled]="form.invalid"
+            >
+              Salvar
+            </button>
+            <button type="reset" class="btn btn-secondary">Redefinir</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
