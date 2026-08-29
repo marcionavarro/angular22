@@ -1,0 +1,114 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header bg-primary">Lista de Usuários</div>
+        <div class="card-body"></div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">Cadastro de Usuário</h2>
+
+          <form [formGroup]="userForm">
+            <!-- userId -->
+            <input type="hidden" name="userId" value="0" />
+
+            <div class="row">
+              <div class="col-6">
+                <!-- userName -->
+                <div class="mb-3">
+                  <label for="userName" class="form-label"> Nome de usuário </label>
+
+                  <input
+                    type="text"
+                    formControlName="userName"
+                    class="form-control"
+                    id="userName"
+                    name="userName"
+                    placeholder="Digite o nome de usuário"
+                    required
+                  />
+                  <div class="text-danger">
+                    @if (userForm.controls['userName'].errors?.['required']) {
+                      <span>Campo obrigatório</span>
+                    }
+                    @if (userForm.controls['userName'].errors?.['minlength']) {
+                      <span>Min 4 caracteres</span>
+                    }
+                  </div>
+                </div>
+
+                <!-- emailId -->
+                <div class="mb-3">
+                  <label for="email" class="form-label"> E-mail </label>
+
+                  <input
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="nome@exemplo.com"
+                    required
+                  />
+                  <div class="text-danger">
+                    @if (userForm.controls['email'].errors?.['required']) {
+                      <span>Campo obrigatório</span>
+                    }
+                    @if (userForm.controls['email'].errors?.['email']) {
+                      <span>Email não é válido</span>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <!-- fullName -->
+                <div class="mb-3">
+                  <label for="fullName" class="form-label"> Nome completo </label>
+
+                  <input
+                    type="text"
+                    formControlName="fullName"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Digite seu nome completo"
+                  />
+                </div>
+
+                <!-- password -->
+                <div class="mb-4">
+                  <label for="password" class="form-label"> Senha </label>
+
+                  <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Digite sua senha"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="d-flex gap-2">
+              <button
+                type="buton"
+                class="btn btn-primary w-100"
+                (click)="onSaveCustomer()"
+                [disabled]="userForm.invalid"
+              >
+                Cadastrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
