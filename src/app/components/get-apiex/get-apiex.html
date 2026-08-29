@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-4">
+    <ul>
+      @for (item of userList(); track $index) {
+        <li>{{ item.name }} | {{ item.email }}</li>
+      }
+    </ul>
+  </div>
+  <!--<div class="col-4">
+     @for (item of photosList(); track $index) {
+      <div class="row">
+        <div class="col-3">
+          {{ item.title }}
+        </div>
+        <div class="col-6">
+          {{ item.url }}
+        </div>
+      </div>
+    } 
+  </div>-->
+  <div class="col-8">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do Fornecedor</th>
+          <th>Contato</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of vendorList(); track $index) {
+          <tr>
+            <td>{{ item.vendorId }}</td>
+            <td>{{ item.vendorName }}</td>
+            <td>{{ item.contactNo }}</td>
+            <td>{{ item.emailId }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

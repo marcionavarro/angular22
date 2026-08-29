@@ -8,6 +8,7 @@ import { TemForm } from './components/tem-form/tem-form';
 import { ReactiveFormEx } from './components/reactive-form-ex/reactive-form-ex';
 import { SignalBasic } from './components/signal-basic/signal-basic';
 import { SignalFormEx } from './components/signal-form-ex/signal-form-ex';
+import { GetAPIEx } from './components/get-apiex/get-apiex';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
   {
     path: 'signal-form',
     component: SignalFormEx,
+  },
+  {
+    path: 'get-api',
+    component: GetAPIEx,
   },
   {
     path: '**',
