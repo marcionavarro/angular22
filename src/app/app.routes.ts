@@ -9,6 +9,7 @@ import { ReactiveFormEx } from './components/reactive-form-ex/reactive-form-ex';
 import { SignalBasic } from './components/signal-basic/signal-basic';
 import { SignalFormEx } from './components/signal-form-ex/signal-form-ex';
 import { GetAPIEx } from './components/get-apiex/get-apiex';
+import { ClientCrud } from './components/client-crud/client-crud';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'get-api',
     component: GetAPIEx,
+  },
+  {
+    path: 'client-crud',
+    component: ClientCrud,
   },
   {
     path: '**',

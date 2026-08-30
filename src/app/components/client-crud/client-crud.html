@@ -1,0 +1,187 @@
+<div class="container-fluid py-4">
+  <div class="row g-4">
+    <!-- TABELA - 8 COLUNAS -->
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Lista de Clientes</h5>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Nome do Cliente</th>
+                  <th>Empresa</th>
+                  <th>Responsável</th>
+                  <th>Telefone</th>
+                  <th>E-mail</th>
+                  <th>Data de Criação</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (item of clientList(); track $index) {
+                  <tr>
+                    <td>{{ item.clientId }}</td>
+                    <td>{{ item.clientName }}</td>
+                    <td>{{ item.businessName }}</td>
+                    <td>{{ item.contactPerson }}</td>
+                    <td>{{ item.contactNo }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.createdDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary" (click)="onEditClient(item)">
+                        Editar
+                      </button>
+                      <button class="btn btn-sm btn-danger" (click)="onDeleteClient(item.clientId)">
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO - 4 COLUNAS -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Cadastro de Cliente</h5>
+        </div>
+
+        <div class="card-body">
+          <form>
+            <div class="row g-3">
+              <!-- COLUNA 1 -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="clientName" class="form-label"> Nome do Cliente </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.clientName"
+                    id="clientName"
+                    name="clientName"
+                    placeholder="Digite o nome do cliente"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="businessName" class="form-label"> Nome da Empresa </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.businessName"
+                    id="businessName"
+                    name="businessName"
+                    placeholder="Digite o nome da empresa"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="contactPerson" class="form-label"> Pessoa de Contato </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.contactPerson"
+                    id="contactPerson"
+                    name="contactPerson"
+                    placeholder="Digite o responsável"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="contactNo" class="form-label"> Telefone </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.contactNo"
+                    id="contactNo"
+                    name="contactNo"
+                    placeholder="(00) 00000-0000"
+                  />
+                </div>
+              </div>
+
+              <!-- COLUNA 2 -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="altContactNo" class="form-label"> Telefone Alternativo </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.altContactNo"
+                    id="altContactNo"
+                    name="altContactNo"
+                    placeholder="(00) 00000-0000"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label"> E-mail </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.email"
+                    id="email"
+                    name="email"
+                    placeholder="cliente@empresa.com.br"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="createdDate" class="form-label"> Data de Criação </label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.createdDate"
+                    id="createdDate"
+                    name="createdDate"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="logo" class="form-label"> Logo </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newClientObj.logo"
+                    id="logo"
+                    name="logo"
+                    placeholder="URL da logo"
+                  />
+                </div>
+              </div>
+
+              <!-- BOTÕES -->
+              <div class="col-12">
+                <hr />
+
+                <div class="d-flex gap-2">
+                  @if (this.newClientObj.clientId === 0) {
+                    <button type="submit" class="btn btn-success" (click)="onSaveClient()">
+                      Salvar
+                    </button>
+                  } @else {
+                    <button type="submit" class="btn btn-success" (click)="onUpdateClient()">
+                      Editar
+                    </button>
+                  }
+                  <button type="reset" class="btn btn-secondary">Limpar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
