@@ -1,10 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { form, FormField, minLength, required, schema } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-signal-form-ex',
   imports: [FormField],
   templateUrl: './signal-form-ex.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './signal-form-ex.css',
 })
 export class SignalFormEx {

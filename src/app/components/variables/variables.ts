@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-variables',
   imports: [],
   templateUrl: './variables.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './variables.css',
 })
 export class Variables {

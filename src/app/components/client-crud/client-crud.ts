@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface IClient {
@@ -25,6 +25,7 @@ interface IClientGet {
   selector: 'app-client-crud',
   imports: [FormsModule, DatePipe],
   templateUrl: './client-crud.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './client-crud.css',
 })
 export class ClientCrud {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -11,6 +11,7 @@ import {
   selector: 'app-reactive-form-ex',
   imports: [ReactiveFormsModule],
   templateUrl: './reactive-form-ex.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './reactive-form-ex.css',
 })
 export class ReactiveFormEx {

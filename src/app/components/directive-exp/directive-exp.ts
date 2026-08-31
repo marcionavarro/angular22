@@ -1,11 +1,12 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-directive-exp',
   imports: [NgClass, NgStyle, FormsModule],
   templateUrl: './directive-exp.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './directive-exp.css',
 })
 export class DirectiveExp {

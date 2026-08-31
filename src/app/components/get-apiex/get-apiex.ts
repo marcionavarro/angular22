@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-get-apiex',
   imports: [],
   templateUrl: './get-apiex.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './get-apiex.css',
 })
 export class GetAPIEx {
