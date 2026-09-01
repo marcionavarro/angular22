@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Master } from '../../services/master';
 
 @Component({
   selector: 'app-control-flow',
@@ -15,6 +16,8 @@ export class ControlFlow {
 
   cityList = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
 
+  masterSrv = inject(Master);
+
   studentList = [
     { studentId: 322, name: 'John', city: 'New York', rollNo: 101 },
     { studentId: 150, name: 'Alice', city: 'Los Angeles', rollNo: 102 },
@@ -25,6 +28,19 @@ export class ControlFlow {
     { studentId: 654, name: 'Grace', city: 'Los Angeles', rollNo: 107 },
   ];
   selectedStudent = '';
+  originalCardNo = '1211232343435566';
+
+  formatedCardNo: string = '';
+
+  constructor() {
+    this.formatedCardNo = this.masterSrv.getFormatedCardNo(this.originalCardNo);
+    debugger;
+  }
+
+  storeLoggedData() {
+    debugger;
+    this.masterSrv.loggedUser = 'marcio_navarro';
+  }
 
   toggleDiv1() {
     this.isDiv1Visible = !this.isDiv1Visible;
