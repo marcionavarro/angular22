@@ -1,0 +1,42 @@
+<div class="p-2">
+  <div class="row">
+    <div class="col-4">studentName => {{ studentName }}</div>
+    <div class="col-4">{{ studentName | uppercase }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">studentAddress => {{ studentAddress }}</div>
+    <div class="col-4">{{ studentAddress | lowercase }}</div>
+    <div class="col-4">{{ studentAddress | titlecase }}</div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-4">productPrice => {{ productPrice }}</div>
+    <div class="col-4">{{ productPrice | number }}</div>
+    <div class="col-4">{{ productPrice | number: '1.2-2' }}</div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-3">rollNoList => {{ rollNoList }}</div>
+    <div class="col-3">{{ rollNoList | slice: 3 }}</div>
+    <div class="col-3">{{ rollNoList | slice: 0 : 5 }}</div>
+    <div class="col-3">{{ studentName | slice: 0 : 3 }}</div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-3">studentObj => {{ studentObj }}</div>
+    <div class="col-3">{{ studentObj | json }}</div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-3">currentData => {{ currentData | date }}</div>
+    <div class="col-3">{{ currentData | date: 'dd/MM/yy' }}</div>
+    <div class="col-3">{{ currentData | date: 'dd/MMM/yy' }}</div>
+    <div class="col-3">{{ currentData | date: 'dd/MMMM/yyyy' }}</div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-3">{{ '1111 2222 3333 5656' | cardNoFormatter }}</div>
+    <div class="col-3">{{ cardNo | cardNoFormatter }}</div>
+  </div>
+</div>
