@@ -1,1 +1,86 @@
-<p>layout works!</p>
+<div class="app-shell" [ngClass]="isSidebarOpen ? '' : 'sidebar-collapsed'">
+  <aside class="sidebar">
+    <div class="brand-box">
+      <div class="brand-mark">EM</div>
+      <div class="brand-text">
+        <small>Employee</small>
+        <strong>Management</strong>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Menu principal">
+      <a href="#" class="nav-item active">
+        <span class="nav-icon"><i class="bi bi-grid-1x2-fill"></i></span>
+        <span class="nav-label">Dashboard</span>
+        <span class="nav-short" aria-label="Dashboard">D</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon"><i class="bi bi-people-fill"></i></span>
+        <span class="nav-label">Funcionários</span>
+        <span class="nav-short" aria-label="Funcionários">F</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon"><i class="bi bi-briefcase-fill"></i></span>
+        <span class="nav-label">Projetos</span>
+        <span class="nav-short" aria-label="Projetos">P</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon"><i class="bi bi-kanban-fill"></i></span>
+        <span class="nav-label">Atividades</span>
+        <span class="nav-short" aria-label="Atividades">A</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon"><i class="bi bi-gear-fill"></i></span>
+        <span class="nav-label">Configurações</span>
+        <span class="nav-short" aria-label="Configurações">C</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-pill">
+        <span class="dot"></span>
+        Online
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-panel">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button
+          class="toggle-btn"
+          type="button"
+          aria-label="Alternar menu"
+          (click)="isSidebarOpen = !isSidebarOpen"
+        >
+          <span class="toggle-icon">
+            <i class="bi bi-layout-sidebar-inset"></i>
+          </span>
+        </button>
+        <div>
+          <p class="page-kicker">Overview</p>
+          <h1 class="page-title">Dashboard</h1>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="user-box">
+          <div class="user-avatar">JS</div>
+          <div class="user-meta">
+            <strong>{{ loggedUserData.employeeName }}</strong>
+            <small>{{ loggedUserData.role }}</small>
+          </div>
+        </div>
+
+        <button class="logout-btn" type="button" (click)="onLogout()">
+          <i class="bi bi-box-arrow-right"></i>
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
