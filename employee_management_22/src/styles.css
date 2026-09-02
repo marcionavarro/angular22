@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ocean-bg: #0f172a;
+  --ocean-surface: #1e293b;
+  --ocean-surface-strong: #162131;
+  --ocean-primary: #0ea5e9;
+  --ocean-secondary: #06b6d4;
+  --ocean-highlight: #38bdf8;
+  --ocean-text: #f1f5f9;
+  --ocean-text-soft: #94a3b8;
+  --ocean-border: rgba(148, 163, 184, 0.2);
+  --ocean-shadow: rgba(15, 23, 42, 0.45);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--ocean-bg);
+  color: var(--ocean-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
