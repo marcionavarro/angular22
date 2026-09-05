@@ -1,1 +1,138 @@
-<p>employee-list works!</p>
+<section aria-labelledby="employee-list-title">
+  <div class="crud-toolbar">
+    <div>
+      <h2 id="employee-list-title" class="crud-toolbar-title">Funcionários</h2>
+      <p class="crud-toolbar-subtitle">Gerencie os colaboradores cadastrados na empresa.</p>
+    </div>
+
+    <div class="crud-actions">
+      <button class="crud-btn crud-btn-secondary" type="button">
+        <i class="bi bi-download" aria-hidden="true"></i>
+        Exportar
+      </button>
+      <button class="crud-btn crud-btn-primary" routerLink="/admin/new-employee">
+        <i class="bi bi-plus-lg" aria-hidden="true"></i>
+        Adicionar Funcionário
+      </button>
+    </div>
+  </div>
+
+  <div class="crud-table-shell">
+    <div class="crud-table-scroll">
+      <table class="crud-table">
+        <thead>
+          <tr>
+            <th scope="col">Funcionário</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="text-end">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="crud-avatar">JS</span>
+              <strong>João Silva</strong>
+            </td>
+            <td>Desenvolvedor Sênior</td>
+            <td>Tecnologia</td>
+            <td><span class="crud-status crud-status-active">Ativo</span></td>
+            <td>
+              <div class="crud-table-actions">
+                <button
+                  class="crud-btn crud-btn-secondary crud-btn-icon"
+                  type="button"
+                  aria-label="Editar João Silva"
+                  title="Editar"
+                >
+                  <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                </button>
+                <button
+                  class="crud-btn crud-btn-danger crud-btn-icon"
+                  type="button"
+                  aria-label="Excluir João Silva"
+                  title="Excluir"
+                >
+                  <i class="bi bi-trash3" aria-hidden="true"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="crud-avatar">MC</span>
+              <strong>Mariana Costa</strong>
+            </td>
+            <td>Product Designer</td>
+            <td>Produto</td>
+            <td><span class="crud-status crud-status-active">Ativo</span></td>
+            <td>
+              <div class="crud-table-actions">
+                <button
+                  class="crud-btn crud-btn-secondary crud-btn-icon"
+                  type="button"
+                  aria-label="Editar Mariana Costa"
+                  title="Editar"
+                >
+                  <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                </button>
+                <button
+                  class="crud-btn crud-btn-danger crud-btn-icon"
+                  type="button"
+                  aria-label="Excluir Mariana Costa"
+                  title="Excluir"
+                >
+                  <i class="bi bi-trash3" aria-hidden="true"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="crud-avatar">RA</span>
+              <strong>Rafael Almeida</strong>
+            </td>
+            <td>Analista de Projetos</td>
+            <td>Operações</td>
+            <td><span class="crud-status crud-status-inactive">Inativo</span></td>
+            <td>
+              <div class="crud-table-actions">
+                <button
+                  class="crud-btn crud-btn-secondary crud-btn-icon"
+                  type="button"
+                  aria-label="Editar Rafael Almeida"
+                  title="Editar"
+                >
+                  <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                </button>
+                <button
+                  class="crud-btn crud-btn-danger crud-btn-icon"
+                  type="button"
+                  aria-label="Excluir Rafael Almeida"
+                  title="Excluir"
+                >
+                  <i class="bi bi-trash3" aria-hidden="true"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="crud-pagination">
+      <span>Exibindo 3 de 24 funcionários</span>
+      <div class="crud-pagination-actions">
+        <button class="crud-btn crud-btn-secondary" type="button" aria-label="Página anterior">
+          <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          Anterior
+        </button>
+        <button class="crud-btn crud-btn-secondary" type="button" aria-label="Próxima página">
+          Próxima
+          <i class="bi bi-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

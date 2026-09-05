@@ -1,1 +1,135 @@
-<p>employee-form works!</p>
+<section aria-labelledby="employee-form-title">
+  <div class="crud-toolbar">
+    <div>
+      <h2 id="employee-form-title" class="crud-toolbar-title">Novo funcionário</h2>
+      <p class="crud-toolbar-subtitle">
+        Preencha os dados do colaborador para cadastrá-lo no sistema.
+      </p>
+    </div>
+  </div>
+
+  <form class="crud-form-shell">
+    <div class="crud-form-grid">
+      <div class="crud-form-field crud-form-field-full">
+        <label class="crud-form-label" for="employeeName">Nome completo</label>
+        <input
+          id="employeeName"
+          name="employeeName"
+          [(ngModel)]="employeeObj.employeeName"
+          class="crud-form-control"
+          type="text"
+          placeholder="Digite o nome completo"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="contactNo">Telefone</label>
+        <input
+          id="contactNo"
+          name="contactNo"
+          [(ngModel)]="employeeObj.contactNo"
+          class="crud-form-control"
+          type="text"
+          placeholder="(00) 00000-0000"
+          autocomplete="tel"
+        />
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="emailId">E-mail</label>
+        <input
+          id="emailId"
+          name="emailId"
+          [(ngModel)]="employeeObj.emailId"
+          class="crud-form-control"
+          type="text"
+          placeholder="nome@empresa.com"
+          autocomplete="email"
+        />
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="parentDepartment">Departamento pai</label>
+        <select
+          id="parentDepartment"
+          name="parentDepartment"
+          (change)="onChangeParent($event)"
+          class="crud-form-control"
+        >
+          <option value="" selected>Selecione o departamento pai</option>
+          @for (item of parentDepartmentsList(); track $index) {
+            <option [value]="item.departmentId">{{ item.departmentName }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="childDepartment">Departamento filho</label>
+        <select
+          id="childDepartment"
+          name="childDepartment"
+          [(ngModel)]="employeeObj.deptId"
+          class="crud-form-control"
+        >
+          <option value="" selected>Selecione o departamento filho</option>
+          @for (item of childDepartmentsList(); track item.childDptId) {
+            <option [value]="item.childDptId">{{ item.departmentName }}</option>
+          }
+        </select>
+        <small class="crud-form-hint">
+          As opções serão filtradas pelo departamento pai selecionado.
+        </small>
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="password">Senha</label>
+        <input
+          id="password"
+          name="password"
+          [(ngModel)]="employeeObj.password"
+          class="crud-form-control"
+          type="password"
+          placeholder="Crie uma senha de acesso"
+          autocomplete="new-password"
+        />
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="gender">Gênero</label>
+        <select
+          id="gender"
+          name="gender"
+          [(ngModel)]="employeeObj.gender"
+          class="crud-form-control"
+        >
+          <option value="" selected>Selecione uma opção</option>
+          <option value="female">Feminino</option>
+          <option value="male">Masculino</option>
+          <option value="non-binary">Não binário</option>
+          <option value="not-informed">Prefiro não informar</option>
+        </select>
+      </div>
+
+      <div class="crud-form-field">
+        <label class="crud-form-label" for="role">Função</label>
+        <input
+          id="role"
+          name="role"
+          [(ngModel)]="employeeObj.role"
+          class="crud-form-control"
+          type="text"
+          placeholder="Ex.: Analista de Projetos"
+        />
+      </div>
+    </div>
+
+    <div class="crud-form-footer">
+      <button class="crud-btn crud-btn-secondary" type="button">Cancelar</button>
+      <button class="crud-btn crud-btn-primary" type="button" (click)="onSaveEmployee()">
+        <i class="bi bi-check2" aria-hidden="true"></i>
+        Salvar funcionário
+      </button>
+    </div>
+  </form>
+</section>

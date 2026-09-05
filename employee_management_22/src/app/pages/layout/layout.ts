@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { IUser } from '../../core/model/interfaces/User.Model';
 import { GlobalConstant } from '../../core/globalConstant/Global.constant';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, NgClass],
+  imports: [RouterOutlet, NgClass, RouterLink, RouterLinkActive],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })

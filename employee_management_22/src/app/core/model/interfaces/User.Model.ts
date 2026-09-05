@@ -9,3 +9,21 @@ export interface IUser {
   role: string;
   createdDate: string;
 }
+
+export interface IApiResponseModel {
+  message: string;
+  result: boolean;
+  data: any;
+}
+
+export interface IParentDepartment {
+  departmentId: number;
+  departmentName: string;
+  departmentLogo: string;
+}
+
+export interface IChildDepartment {
+  childDptId: number;
+  parentDptId: number;
+  departmentName: string;
+}
