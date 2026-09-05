@@ -8,5 +8,7 @@ export const GlobalConstant = {
     DELETE_EMPLOYEE: 'DeleteEmployee/',
     GET_ALL_PARENT_DEPARTMENTS: 'GetParentDepartment',
     GET_ALL_CHILD_DEPARTMENTS: 'GetChildDepartmentByParentId/',
+    GET_ALL_PROJECTS: 'GetAllProjects',
+    CREATE_NEW_PROJECT: 'CreateProject',
   },
 };

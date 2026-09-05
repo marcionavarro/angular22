@@ -27,3 +27,18 @@ export interface IChildDepartment {
   parentDptId: number;
   departmentName: string;
 }
+
+export interface NewProjectModel {
+  projectId: number;
+  projectName: string;
+  clientName: string;
+  startDate: string;
+  leadByEmpId: number;
+  contactPerson: string;
+  contactNo: string;
+  emailId: string;
+}
+
+export interface IProject extends NewProjectModel {
+  employeeName: string;
+}

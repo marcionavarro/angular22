@@ -1,1 +1,182 @@
-<p>projects works!</p>
+<section class="projects-page" aria-labelledby="projects-title">
+  <div class="crud-toolbar projects-toolbar">
+    <div>
+      <span class="projects-eyebrow">Gestão de projetos</span>
+      <h2 id="projects-title" class="crud-toolbar-title">Projetos</h2>
+      <p class="crud-toolbar-subtitle">
+        Acompanhe projetos, clientes e responsáveis em um só lugar.
+      </p>
+    </div>
+    <div>
+      <button class="crud-btn crud-btn-primary" type="button" (click)="showFormPanel()">
+        <i class="bi bi-check2" aria-hidden="true"></i>
+        Criar projeto
+      </button>
+    </div>
+  </div>
+
+  <div class="projects-workspace" [class.projects-workspace-form-visible]="isFormVisible">
+    <div class="projects-list-view">
+      <div class="project-summary-row">
+        <div class="project-summary-card">
+          <span class="project-summary-icon"><i class="bi bi-kanban-fill"></i></span>
+          <span class="project-summary-label">Projetos</span>
+          <strong>{{ projectList().length }}</strong>
+          <small>+2 este mês</small>
+        </div>
+        <div class="project-summary-card">
+          <span class="project-summary-icon"><i class="bi bi-people-fill"></i></span>
+          <span class="project-summary-label">Clientes atendidos</span>
+          <strong>08</strong>
+          <small>03 novos clientes</small>
+        </div>
+        <div class="project-summary-card">
+          <span class="project-summary-icon"><i class="bi bi-calendar-check-fill"></i></span>
+          <span class="project-summary-label">Entregas no mês</span>
+          <strong>06</strong>
+          <small>92% no prazo</small>
+        </div>
+      </div>
+
+      <div class="project-card-grid">
+        @for (item of projectList(); track $index) {
+          <article class="project-card">
+            <div class="project-card-header">
+              <div class="project-card-mark">{{ getProjectNameInitials(item.projectName) }}</div>
+              <!-- <span class="crud-status crud-status-active">Em andamento</span> -->
+            </div>
+            <h3>{{ item.projectName }}</h3>
+            <p class="project-client">
+              <i class="bi bi-building" aria-hidden="true"></i>
+              {{ item.clientName }}
+            </p>
+            <div class="project-card-meta">
+              <span
+                ><i class="bi bi-calendar3" aria-hidden="true"></i
+                >{{ item.startDate | date: 'dd MMM. yyyy' : '' : 'pt-BR' }}</span
+              >
+              <span><i class="bi bi-person" aria-hidden="true"></i>{{ item.employeeName }}</span>
+            </div>
+            <div class="project-card-footer">
+              <span class="project-progress-label">{{ item.emailId }}</span>
+              <!--<strong>68%</strong></span>
+               <div class="project-progress" aria-label="Progresso de 68%">
+                <span style="width: 68%"></span>
+              </div> -->
+            </div>
+            <div class="crud-table-actions project-card-actions">
+              <button
+                class="crud-btn crud-btn-secondary crud-btn-icon"
+                type="button"
+                aria-label="Editar App de pagamentos"
+                title="Editar"
+              >
+                <i class="bi bi-pencil-square" aria-hidden="true"></i>
+              </button>
+              <button
+                class="crud-btn crud-btn-danger crud-btn-icon"
+                type="button"
+                aria-label="Excluir App de pagamentos"
+                title="Excluir"
+              >
+                <i class="bi bi-trash3" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+
+    @if (isFormVisible) {
+      <div class="projects-form-view">
+        <form class="crud-form-shell project-form-card">
+          <div class="project-form-heading">
+            <span class="projects-eyebrow">Cadastro</span>
+            <h3>Novo projeto</h3>
+            <p>Adicione as informações principais para acompanhar este projeto.</p>
+          </div>
+
+          <div class="crud-form-grid">
+            <div class="crud-form-field crud-form-field-full">
+              <label class="crud-form-label" for="projectName">Nome do projeto</label>
+              <input
+                id="projectName"
+                name="projectName"
+                class="crud-form-control"
+                type="text"
+                placeholder="Ex.: Plataforma de pagamentos"
+              />
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="clientName">Cliente</label>
+              <input
+                id="clientName"
+                name="clientName"
+                class="crud-form-control"
+                type="text"
+                placeholder="Nome do cliente"
+              />
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="startDate">Data de início</label>
+              <input id="startDate" name="startDate" class="crud-form-control" type="date" />
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="leadByEmpId">Responsável</label>
+              <select id="leadByEmpId" name="leadByEmpId" class="crud-form-control">
+                <option value="" selected>Selecione o responsável</option>
+                <option value="1">João Silva</option>
+                <option value="2">Mariana Costa</option>
+                <option value="3">Rafael Almeida</option>
+              </select>
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="contactPerson">Pessoa de contato</label>
+              <input
+                id="contactPerson"
+                name="contactPerson"
+                class="crud-form-control"
+                type="text"
+                placeholder="Nome do contato"
+              />
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="contactNo">Telefone de contato</label>
+              <input
+                id="contactNo"
+                name="contactNo"
+                class="crud-form-control"
+                type="tel"
+                placeholder="(00) 00000-0000"
+              />
+            </div>
+            <div class="crud-form-field">
+              <label class="crud-form-label" for="emailId">E-mail de contato</label>
+              <input
+                id="emailId"
+                name="emailId"
+                class="crud-form-control"
+                type="email"
+                placeholder="contato@empresa.com"
+              />
+            </div>
+          </div>
+
+          <div class="crud-form-footer">
+            <button
+              class="crud-btn crud-btn-secondary"
+              type="button"
+              (click)="isFormVisible = false"
+            >
+              Cancelar
+            </button>
+            <button class="crud-btn crud-btn-primary" type="submit">
+              <i class="bi bi-check2" aria-hidden="true"></i>
+              Salvar projeto
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+  </div>
+</section>
