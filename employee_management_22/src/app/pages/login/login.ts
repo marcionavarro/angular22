@@ -22,10 +22,8 @@ export class Login {
   constructor(private http: HttpClient) {}
 
   onLogin() {
-    debugger;
     this.http.post(environment.API_URL + '/login', this.loginObj).subscribe({
       next: (response: any) => {
-        debugger;
         if (response.result) {
           alert('Usuário encontrado');
           localStorage.setItem(GlobalConstant.LOGIN_LOCAL_KEY, JSON.stringify(response.data));
@@ -35,7 +33,6 @@ export class Login {
         }
       },
       error: (err: any) => {
-        debugger;
         alert('Erro na API');
       },
     });

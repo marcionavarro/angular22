@@ -1,7 +1,9 @@
 <section aria-labelledby="employee-form-title">
   <div class="crud-toolbar">
     <div>
-      <h2 id="employee-form-title" class="crud-toolbar-title">Novo funcionário</h2>
+      <h2 id="employee-form-title" class="crud-toolbar-title">
+        {{ currentEditEmployeeId == 0 ? 'Novo' : 'Editar' }} funcionário
+      </h2>
       <p class="crud-toolbar-subtitle">
         Preencha os dados do colaborador para cadastrá-lo no sistema.
       </p>
@@ -73,8 +75,8 @@
           class="crud-form-control"
         >
           <option value="" selected>Selecione o departamento filho</option>
-          @for (item of childDepartmentsList(); track item.childDptId) {
-            <option [value]="item.childDptId">{{ item.departmentName }}</option>
+          @for (item of childDepartmentsList(); track item.childDeptId) {
+            <option [value]="item.childDeptId">{{ item.departmentName }}</option>
           }
         </select>
         <small class="crud-form-hint">
@@ -125,11 +127,20 @@
     </div>
 
     <div class="crud-form-footer">
-      <button class="crud-btn crud-btn-secondary" type="button">Cancelar</button>
-      <button class="crud-btn crud-btn-primary" type="button" (click)="onSaveEmployee()">
-        <i class="bi bi-check2" aria-hidden="true"></i>
-        Salvar funcionário
+      <button class="crud-btn crud-btn-secondary" type="button" routerLink="/admin/employee-list">
+        Cancelar
       </button>
+      @if (currentEditEmployeeId == 0) {
+        <button class="crud-btn crud-btn-primary" type="button" (click)="onSaveEmployee()">
+          <i class="bi bi-check2" aria-hidden="true"></i>
+          Salvar funcionário
+        </button>
+      } @else {
+        <button class="crud-btn crud-btn-secondary" type="button" (click)="onEditEmployee()">
+          <i class="bi bi-check2" aria-hidden="true"></i>
+          Editar funcionário
+        </button>
+      }
     </div>
   </form>
 </section>

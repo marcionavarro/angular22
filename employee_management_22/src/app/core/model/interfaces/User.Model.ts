@@ -23,7 +23,7 @@ export interface IParentDepartment {
 }
 
 export interface IChildDepartment {
-  childDptId: number;
+  childDeptId: number;
   parentDptId: number;
   departmentName: string;
 }

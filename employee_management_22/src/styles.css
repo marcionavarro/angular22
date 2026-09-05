@@ -117,6 +117,8 @@ body {
 }
 
 .crud-table-shell {
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   background: rgba(30, 41, 59, 0.88);
   border: 1px solid var(--ocean-border);
@@ -125,7 +127,31 @@ body {
 }
 
 .crud-table-scroll {
-  overflow-x: auto;
+  max-width: 100%;
+  max-height: 520px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ocean-primary) rgba(15, 23, 42, 0.7);
+  scrollbar-width: thin;
+}
+
+.crud-table-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.crud-table-scroll::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.crud-table-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(15, 23, 42, 0.7);
+  border-radius: 999px;
+  background: var(--ocean-primary);
+}
+
+.crud-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--ocean-highlight);
 }
 
 .crud-table {

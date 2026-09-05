@@ -8,10 +8,11 @@ import {
   IChildDepartment,
   IParentDepartment,
 } from '../../core/model/interfaces/User.Model';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './employee-form.html',
   styleUrl: './employee-form.css',
 })
@@ -20,11 +21,23 @@ export class EmployeeForm implements OnInit {
 
   employeeService = inject(EmployeeService);
   masterService = inject(MasterService);
+  activetedRoute = inject(ActivatedRoute);
 
   parentDepartmentsList: WritableSignal<IParentDepartment[]> = signal([]);
   childDepartmentsList: WritableSignal<IChildDepartment[]> = signal([]);
 
+  currentEditEmployeeId: number = 0;
+
   ngOnInit() {
+    this.activetedRoute.params.subscribe({
+      next: (res: any) => {
+        this.currentEditEmployeeId = res.id;
+        if (this.currentEditEmployeeId != 0) {
+          this.getEmployeeDetails();
+        }
+      },
+      error: (err: any) => console.error('Erro ao obter parâmetros da rota:', err),
+    });
     this.getParentDepartments();
   }
 
@@ -34,6 +47,15 @@ export class EmployeeForm implements OnInit {
         this.parentDepartmentsList.set(res.data);
       },
       error: (err: any) => console.error('Erro ao obter departamentos:', err),
+    });
+  }
+
+  getEmployeeDetails() {
+    this.employeeService.getEmployeeById(this.currentEditEmployeeId).subscribe({
+      next: (res: EmployeeModel) => {
+        this.employeeObj = res;
+      },
+      error: (err: any) => console.error('Erro ao obter detalhes do funcionário:', err),
     });
   }
 
@@ -51,7 +73,16 @@ export class EmployeeForm implements OnInit {
   onSaveEmployee() {
     this.employeeService.onCreateEmployee(this.employeeObj).subscribe({
       next: (res: EmployeeModel) => {
-        alert('Funcionário criado com sucesso!');
+        alert(`Funcionário ${res.employeeName}  criado com sucesso!`);
+      },
+      error: (err: any) => console.error('Erro ao criar funcionário:', err),
+    });
+  }
+
+  onEditEmployee() {
+    this.employeeService.onUpdateEmployee(this.currentEditEmployeeId, this.employeeObj).subscribe({
+      next: () => {
+        alert(`Funcionário atualizado com sucesso!`);
       },
       error: (err: any) => console.error('Erro ao criar funcionário:', err),
     });
