@@ -58,6 +58,7 @@ export class Projects implements OnInit {
 
   showFormPanel() {
     this.isFormVisible = true;
+    this.currentProjectId = 0;
     this.projectForm.reset({
       projectId: 0,
     });
