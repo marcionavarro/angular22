@@ -1,6 +1,7 @@
 export const GlobalConstant = {
   LOGIN_LOCAL_KEY: 'emp_user',
   API_METHOD: {
+    GET_DASHBOARD: 'GetDashboard',
     GET_ALL_EMPLOYEE: 'GetAllEmployees',
     GET_EMPLOYEE_BY_ID: 'GetEmployee/',
     CREATE_EMPLOYEE: 'CreateEmployee',
@@ -9,6 +10,12 @@ export const GlobalConstant = {
     GET_ALL_PARENT_DEPARTMENTS: 'GetParentDepartment',
     GET_ALL_CHILD_DEPARTMENTS: 'GetChildDepartmentByParentId/',
     GET_ALL_PROJECTS: 'GetAllProjects',
+    GET_PROJECT: 'GetProject/',
     CREATE_NEW_PROJECT: 'CreateProject',
+    UPDATE_PROJECT: 'UpdateProject/',
+    DELETE_PROJECT: 'DeleteProject/',
+    GET_ALL_PROJECT_EMPLOYEES: 'GetAllProjectEmployees',
+    CREATE_PROJECT_EMPLOYEE: 'CreateProjectEmployee',
+    DELETE_PROJECT_EMPLOYEE: 'DeleteProjectEmployee/',
   },
 };

@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { EmployeeModel } from '../../core/model/classes/Employee.model';
 import { EmployeeService } from '../../core/services/employee-service';
 import { AsyncPipe } from '@angular/common';
@@ -16,8 +16,18 @@ export class EmployeeList {
 
   employeeService = inject(EmployeeService);
 
+  isLoading = signal(false);
+
   constructor() {
-    this.employeeList$ = this.employeeService.getAllEmployee();
+    this.loadEmployees();
+  }
+
+  loadEmployees() {
+    this.isLoading.set(true);
+
+    this.employeeList$ = this.employeeService
+      .getAllEmployee()
+      .pipe(finalize(() => this.isLoading.set(false)));
   }
 
   onDeleteEmployee(employeeId: number) {
@@ -30,7 +40,6 @@ export class EmployeeList {
         },
         error: (err: any) => console.error('Erro ao excluir funcionário:', err),
       });
-    } else {
     }
   }
 }

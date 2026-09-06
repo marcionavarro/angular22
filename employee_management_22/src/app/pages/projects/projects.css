@@ -203,7 +203,202 @@
 }
 
 .project-card-actions {
+  align-items: center;
   margin-top: 18px;
+}
+
+.project-employee-btn {
+  min-height: 36px;
+  padding: 8px 11px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.project-assignment-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-assignment-modal {
+  position: fixed;
+  z-index: 1055;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.project-assignment-toggle:checked ~ .projects-page .project-assignment-modal {
+  display: flex;
+}
+
+.project-assignment-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 8, 23, 0.78);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.project-assignment-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(100%, 1200px);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  flex-direction: column;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--ocean-border);
+  border-radius: 18px;
+  background: var(--ocean-surface);
+  box-shadow: 0 28px 80px rgba(2, 8, 23, 0.62);
+}
+
+.project-assignment-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.project-assignment-heading h2 {
+  margin: 0 0 7px;
+  color: var(--ocean-text);
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.project-assignment-heading p {
+  margin: 0;
+  color: var(--ocean-text-soft);
+  font-size: 0.86rem;
+}
+
+.project-assignment-form {
+  max-width: none;
+  margin-top: 22px;
+  padding: 22px;
+}
+
+.project-assignment-form .crud-form-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.project-assignment-table-shell .crud-table-scroll {
+  max-height: 280px;
+}
+
+.project-assignment-form-heading {
+  margin-bottom: 22px;
+}
+
+.project-assignment-form-heading h3 {
+  margin: 0 0 6px;
+  color: var(--ocean-text);
+  font-size: 1.05rem;
+}
+
+.project-assignment-form-heading p {
+  margin: 0;
+  color: var(--ocean-text-soft);
+  font-size: 0.82rem;
+}
+
+.project-assignment-modal-footer {
+  order: 3;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.project-assignment-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 15px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.project-assignment-status-field,
+.project-assignment-action-field {
+  grid-column: span 2;
+}
+
+.project-assignment-action-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.project-assignment-status div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-assignment-status strong {
+  color: var(--ocean-text);
+  font-size: 0.86rem;
+}
+
+.project-assignment-status small {
+  color: var(--ocean-text-soft);
+  font-size: 0.75rem;
+}
+
+.project-assignment-status .form-check-input {
+  width: 2.5em;
+  height: 1.25em;
+  margin: 0;
+  border-color: rgba(148, 163, 184, 0.35);
+  background-color: rgba(15, 23, 42, 0.8);
+  cursor: pointer;
+}
+
+.project-assignment-status .form-check-input:checked {
+  border-color: var(--ocean-primary);
+  background-color: var(--ocean-primary);
+}
+
+@media (max-width: 640px) {
+  .project-assignment-modal {
+    padding: 12px;
+  }
+
+  .project-assignment-panel {
+    padding: 18px;
+  }
+
+  .project-assignment-heading {
+    flex-direction: column;
+  }
+
+  .project-assignment-form {
+    padding: 18px;
+  }
+
+  .project-assignment-status-field,
+  .project-assignment-action-field {
+    grid-column: auto;
+  }
+
+  .project-assignment-action-field .crud-btn {
+    width: 100%;
+  }
+
+  .project-assignment-form .crud-form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project-form-card {
@@ -243,6 +438,10 @@
 
   .project-form-card {
     position: static;
+  }
+
+  .project-assignment-form .crud-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

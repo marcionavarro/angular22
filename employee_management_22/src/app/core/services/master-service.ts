@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { IApiResponseModel } from '../model/interfaces/User.Model';
+import { IApiResponseModel, IDashboard } from '../model/interfaces/User.Model';
 import { GlobalConstant } from '../globalConstant/Global.constant';
 
 @Injectable({
@@ -21,5 +21,9 @@ export class MasterService {
     return this.http.get<IApiResponseModel>(
       environment.API_URL + GlobalConstant.API_METHOD.GET_ALL_CHILD_DEPARTMENTS + '?deptId=' + id,
     );
+  }
+
+  getDashboard(): Observable<IDashboard> {
+    return this.http.get<IDashboard>(environment.API_URL + GlobalConstant.API_METHOD.GET_DASHBOARD);
   }
 }

@@ -42,3 +42,10 @@ export interface NewProjectModel {
 export interface IProject extends NewProjectModel {
   employeeName: string;
 }
+
+export interface IDashboard {
+  totalEmployee: number;
+  totalProject: number;
+  recentEmployee: IUser[];
+  recentProjects: IProject[];
+}

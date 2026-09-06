@@ -5,6 +5,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { EmployeeList } from './pages/employee-list/employee-list';
 import { EmployeeForm } from './pages/employee-form/employee-form';
 import { Projects } from './pages/projects/projects';
+import { Notfound } from './pages/notfound/notfound';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,14 @@ export const routes: Routes = [
         path: 'project-list',
         component: Projects,
       },
+      {
+        path: '**',
+        component: Notfound,
+      },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'admin/not-found',
   },
 ];

@@ -17,6 +17,13 @@
     </div>
   </div>
 
+  @if (isLoading()) {
+    <div class="state-loading">
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      Carregando dados do Funcionário...
+    </div>
+  }
+
   <div class="crud-table-shell">
     <div class="crud-table-scroll">
       <table class="crud-table">
@@ -29,55 +36,59 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of employeeList$ | async; track $index) {
-            <tr>
-              <td>
-                <span class="crud-avatar">{{ item.employeeId }}</span>
-                <strong>{{ item.employeeName }}</strong>
-              </td>
-              <td>{{ item.role }}</td>
-              <td>{{ item.deptId }}</td>
-              <td>
-                <div class="crud-table-actions">
-                  <button
-                    class="crud-btn crud-btn-secondary crud-btn-icon"
-                    type="button"
-                    routerLink="/admin/edit-employee/{{ item.employeeId }}"
-                    aria-label="Editar {{ item.employeeName }}"
-                    title="Editar"
-                  >
-                    <i class="bi bi-pencil-square" aria-hidden="true"></i>
-                  </button>
-                  <button
-                    class="crud-btn crud-btn-danger crud-btn-icon"
-                    type="button"
-                    routerLink="/admin/delete-employee/{{ item.employeeId }}"
-                    aria-label="Excluir {{ item.employeeName }}"
-                    title="Excluir"
-                    (click)="onDeleteEmployee(item.employeeId)"
-                  >
-                    <i class="bi bi-trash3" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
+          @for (item of employeeList$ | async; track item.employeeId) {
+            @if (!isLoading()) {
+              <tr>
+                <td>
+                  <span class="crud-avatar">{{ item.employeeId }}</span>
+                  <strong>{{ item.employeeName }}</strong>
+                </td>
+                <td>{{ item.role }}</td>
+                <td>{{ item.deptId }}</td>
+                <td>
+                  <div class="crud-table-actions">
+                    <button
+                      class="crud-btn crud-btn-secondary crud-btn-icon"
+                      type="button"
+                      [routerLink]="['/admin/edit-employee', item.employeeId]"
+                      aria-label="Editar {{ item.employeeName }}"
+                      title="Editar"
+                    >
+                      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      class="crud-btn crud-btn-danger crud-btn-icon"
+                      type="button"
+                      [routerLink]="['/admin/delete-employee', item.employeeId]"
+                      aria-label="Excluir {{ item.employeeName }}"
+                      title="Excluir"
+                      (click)="onDeleteEmployee(item.employeeId)"
+                    >
+                      <i class="bi bi-trash3" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
           }
         </tbody>
       </table>
     </div>
 
-    <div class="crud-pagination">
-      <span>Exibindo 3 de 24 funcionários</span>
-      <div class="crud-pagination-actions">
-        <button class="crud-btn crud-btn-secondary" type="button" aria-label="Página anterior">
-          <i class="bi bi-chevron-left" aria-hidden="true"></i>
-          Anterior
-        </button>
-        <button class="crud-btn crud-btn-secondary" type="button" aria-label="Próxima página">
-          Próxima
-          <i class="bi bi-chevron-right" aria-hidden="true"></i>
-        </button>
+    @if (!isLoading()) {
+      <div class="crud-pagination">
+        <span>Exibindo 3 de 24 funcionários</span>
+        <div class="crud-pagination-actions">
+          <button class="crud-btn crud-btn-secondary" type="button" aria-label="Página anterior">
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+            Anterior
+          </button>
+          <button class="crud-btn crud-btn-secondary" type="button" aria-label="Próxima página">
+            Próxima
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </section>

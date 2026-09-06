@@ -1,25 +1,105 @@
-<section class="hero-card">
-  <div>
-    <span class="eyebrow">Resumo da operação</span>
-    <h2>Desempenho geral da empresa</h2>
-  </div>
-  <button class="primary-btn" type="button">Gerar relatório</button>
-</section>
+<section class="dashboard-page" aria-labelledby="dashboard-title">
+  <section class="hero-card">
+    <div>
+      <span class="eyebrow">Resumo da operação</span>
+      <h2 id="dashboard-title">Visão geral da empresa</h2>
+      <p>Uma leitura rápida das equipes e projetos mais recentes.</p>
+    </div>
+    <button class="primary-btn" type="button" (click)="loadDashboard()">
+      <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+      Atualizar dados
+    </button>
+  </section>
 
-<section class="stats-grid">
-  <article class="stat-card">
-    <span class="stat-label">Colaboradores</span>
-    <strong class="stat-value">1.248</strong>
-    <span class="stat-trend positive">+8.2% este mês</span>
-  </article>
-  <article class="stat-card">
-    <span class="stat-label">Projetos ativos</span>
-    <strong class="stat-value">36</strong>
-    <span class="stat-trend positive">+4 novos</span>
-  </article>
-  <article class="stat-card">
-    <span class="stat-label">Meta de produção</span>
-    <strong class="stat-value">94%</strong>
-    <span class="stat-trend neutral">Em linha</span>
-  </article>
+  @if (isLoading()) {
+    <div class="dashboard-state">
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      Carregando dados do dashboard...
+    </div>
+  } @else if (hasError()) {
+    <div class="dashboard-state dashboard-state-error" role="alert">
+      <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+      Não foi possível carregar os dados do dashboard.
+      <button class="primary-btn" type="button" (click)="loadDashboard()">Tentar novamente</button>
+    </div>
+  } @else if (dashboard(); as data) {
+    <section class="stats-grid" aria-label="Indicadores principais">
+      <article class="stat-card stat-card-employees">
+        <span class="stat-icon"><i class="bi bi-people-fill" aria-hidden="true"></i></span>
+        <span class="stat-label">Total de colaboradores</span>
+        <strong class="stat-value">{{ data.totalEmployee | number }}</strong>
+        <span class="stat-trend">Registros na empresa</span>
+      </article>
+      <article class="stat-card stat-card-projects">
+        <span class="stat-icon"><i class="bi bi-kanban-fill" aria-hidden="true"></i></span>
+        <span class="stat-label">Total de projetos</span>
+        <strong class="stat-value">{{ data.totalProject | number }}</strong>
+        <span class="stat-trend">Projetos cadastrados</span>
+      </article>
+      <article class="stat-card stat-card-recent">
+        <span class="stat-icon"><i class="bi bi-activity" aria-hidden="true"></i></span>
+        <span class="stat-label">Atividade recente</span>
+        <strong class="stat-value">{{
+          data.recentEmployee.length + data.recentProjects.length
+        }}</strong>
+        <span class="stat-trend">Novos registros exibidos</span>
+      </article>
+    </section>
+
+    <section class="dashboard-columns">
+      <article class="dashboard-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Equipe</span>
+            <h3>Colaboradores recentes</h3>
+          </div>
+          <span class="panel-count">{{ data.recentEmployee.length }}</span>
+        </div>
+        <div class="dashboard-list">
+          @for (employee of data.recentEmployee; track employee.employeeId) {
+            <div class="dashboard-list-item">
+              <span class="dashboard-avatar">{{ getInitials(employee.employeeName) }}</span>
+              <div class="dashboard-list-content">
+                <strong>{{ employee.employeeName }}</strong>
+                <span>{{ employee.role }} · {{ employee.emailId }}</span>
+              </div>
+              <time [attr.datetime]="employee.createdDate">{{
+                employee.createdDate | date: 'dd/MM/yyyy'
+              }}</time>
+            </div>
+          } @empty {
+            <div class="dashboard-empty">Nenhum colaborador recente.</div>
+          }
+        </div>
+      </article>
+
+      <article class="dashboard-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Portfólio</span>
+            <h3>Projetos recentes</h3>
+          </div>
+          <span class="panel-count">{{ data.recentProjects.length }}</span>
+        </div>
+        <div class="dashboard-list">
+          @for (project of data.recentProjects; track project.projectId) {
+            <div class="dashboard-list-item">
+              <span class="dashboard-project-icon"
+                ><i class="bi bi-folder2-open" aria-hidden="true"></i
+              ></span>
+              <div class="dashboard-list-content">
+                <strong>{{ project.projectName }}</strong>
+                <span>{{ project.clientName }} · {{ project.contactPerson }}</span>
+              </div>
+              <time [attr.datetime]="project.startDate">{{
+                project.startDate | date: 'dd/MM/yyyy'
+              }}</time>
+            </div>
+          } @empty {
+            <div class="dashboard-empty">Nenhum projeto recente.</div>
+          }
+        </div>
+      </article>
+    </section>
+  }
 </section>

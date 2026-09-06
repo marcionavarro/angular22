@@ -1,3 +1,5 @@
+<input class="project-assignment-toggle" type="checkbox" id="project-assignment-modal" />
+
 <section class="projects-page" aria-labelledby="projects-title">
   <div class="crud-toolbar projects-toolbar">
     <div>
@@ -16,80 +18,75 @@
   </div>
 
   <div class="projects-workspace" [class.projects-workspace-form-visible]="isFormVisible">
-    <div class="projects-list-view">
-      <div class="project-summary-row">
-        <div class="project-summary-card">
-          <span class="project-summary-icon"><i class="bi bi-kanban-fill"></i></span>
-          <span class="project-summary-label">Projetos</span>
-          <strong>{{ projectList().length }}</strong>
-          <small>+2 este mês</small>
-        </div>
-        <div class="project-summary-card">
-          <span class="project-summary-icon"><i class="bi bi-people-fill"></i></span>
-          <span class="project-summary-label">Clientes atendidos</span>
-          <strong>08</strong>
-          <small>03 novos clientes</small>
-        </div>
-        <div class="project-summary-card">
-          <span class="project-summary-icon"><i class="bi bi-calendar-check-fill"></i></span>
-          <span class="project-summary-label">Entregas no mês</span>
-          <strong>06</strong>
-          <small>92% no prazo</small>
-        </div>
+    @if (isLoading()) {
+      <div class="state-loading">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Carregando lista de projetos...
       </div>
+    } @else {
+      <div class="projects-list-view">
+        <div class="project-card-grid">
+          @for (item of projectList(); track $index) {
+            <article class="project-card">
+              <div class="project-card-header">
+                <div class="project-card-mark">{{ getProjectNameInitials(item.projectName) }}</div>
+                <!-- <span class="crud-status crud-status-active">Em andamento</span> -->
+              </div>
+              <h3>{{ item.projectName }}</h3>
+              <p class="project-client">
+                <i class="bi bi-building" aria-hidden="true"></i>
+                {{ item.clientName }}
+              </p>
+              <div class="project-card-meta">
+                <span>
+                  <i class="bi bi-calendar3" aria-hidden="true"></i>
+                  {{ item.startDate | date: 'dd MMM. yyyy' : '' : 'pt-BR' }}
+                </span>
+                <span><i class="bi bi-person" aria-hidden="true"></i>{{ item.employeeName }}</span>
+              </div>
+              <div class="project-card-footer">
+                <span class="project-progress-label">{{ item.emailId }}</span>
+              </div>
+              <div class="crud-table-actions project-card-actions">
+                <label
+                  class="crud-btn crud-btn-secondary project-employee-btn"
+                  for="project-assignment-modal"
+                  (click)="openEmployeeModal(item.projectId)"
+                >
+                  <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
+                  Funcionário
+                </label>
 
-      <div class="project-card-grid">
-        @for (item of projectList(); track $index) {
-          <article class="project-card">
-            <div class="project-card-header">
-              <div class="project-card-mark">{{ getProjectNameInitials(item.projectName) }}</div>
-              <!-- <span class="crud-status crud-status-active">Em andamento</span> -->
-            </div>
-            <h3>{{ item.projectName }}</h3>
-            <p class="project-client">
-              <i class="bi bi-building" aria-hidden="true"></i>
-              {{ item.clientName }}
-            </p>
-            <div class="project-card-meta">
-              <span
-                ><i class="bi bi-calendar3" aria-hidden="true"></i
-                >{{ item.startDate | date: 'dd MMM. yyyy' : '' : 'pt-BR' }}</span
-              >
-              <span><i class="bi bi-person" aria-hidden="true"></i>{{ item.employeeName }}</span>
-            </div>
-            <div class="project-card-footer">
-              <span class="project-progress-label">{{ item.emailId }}</span>
-              <!--<strong>68%</strong></span>
-               <div class="project-progress" aria-label="Progresso de 68%">
-                <span style="width: 68%"></span>
-              </div> -->
-            </div>
-            <div class="crud-table-actions project-card-actions">
-              <button
-                class="crud-btn crud-btn-secondary crud-btn-icon"
-                type="button"
-                aria-label="Editar App de pagamentos"
-                title="Editar"
-              >
-                <i class="bi bi-pencil-square" aria-hidden="true"></i>
-              </button>
-              <button
-                class="crud-btn crud-btn-danger crud-btn-icon"
-                type="button"
-                aria-label="Excluir App de pagamentos"
-                title="Excluir"
-              >
-                <i class="bi bi-trash3" aria-hidden="true"></i>
-              </button>
-            </div>
-          </article>
-        }
+                <div class="d-flex align-items-center gap-2 ms-auto">
+                  <button
+                    class="crud-btn crud-btn-secondary crud-btn-icon"
+                    type="button"
+                    aria-label="Editar {{ item.projectName }}"
+                    title="Editar"
+                    (click)="getProjectDetails(item.projectId, (isFormVisible = true))"
+                  >
+                    <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="crud-btn crud-btn-danger crud-btn-icon"
+                    type="button"
+                    aria-label="Excluir {{ item.projectName }}"
+                    title="Excluir"
+                    (click)="deleteProject(item.projectId)"
+                  >
+                    <i class="bi bi-trash3" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
       </div>
-    </div>
+    }
 
     @if (isFormVisible) {
       <div class="projects-form-view">
-        <form class="crud-form-shell project-form-card">
+        <form class="crud-form-shell project-form-card" [formGroup]="projectForm">
           <div class="project-form-heading">
             <span class="projects-eyebrow">Cadastro</span>
             <h3>Novo projeto</h3>
@@ -102,6 +99,7 @@
               <input
                 id="projectName"
                 name="projectName"
+                formControlName="projectName"
                 class="crud-form-control"
                 type="text"
                 placeholder="Ex.: Plataforma de pagamentos"
@@ -112,6 +110,7 @@
               <input
                 id="clientName"
                 name="clientName"
+                formControlName="clientName"
                 class="crud-form-control"
                 type="text"
                 placeholder="Nome do cliente"
@@ -119,15 +118,26 @@
             </div>
             <div class="crud-form-field">
               <label class="crud-form-label" for="startDate">Data de início</label>
-              <input id="startDate" name="startDate" class="crud-form-control" type="date" />
+              <input
+                id="startDate"
+                name="startDate"
+                formControlName="startDate"
+                class="crud-form-control"
+                type="date"
+              />
             </div>
             <div class="crud-form-field">
               <label class="crud-form-label" for="leadByEmpId">Responsável</label>
-              <select id="leadByEmpId" name="leadByEmpId" class="crud-form-control">
+              <select
+                id="leadByEmpId"
+                name="leadByEmpId"
+                formControlName="leadByEmpId"
+                class="crud-form-control"
+              >
                 <option value="" selected>Selecione o responsável</option>
-                <option value="1">João Silva</option>
-                <option value="2">Mariana Costa</option>
-                <option value="3">Rafael Almeida</option>
+                @for (item of empList$ | async; track $index) {
+                  <option [value]="item.employeeId">{{ item.employeeName }}</option>
+                }
               </select>
             </div>
             <div class="crud-form-field">
@@ -135,6 +145,7 @@
               <input
                 id="contactPerson"
                 name="contactPerson"
+                formControlName="contactPerson"
                 class="crud-form-control"
                 type="text"
                 placeholder="Nome do contato"
@@ -145,6 +156,7 @@
               <input
                 id="contactNo"
                 name="contactNo"
+                formControlName="contactNo"
                 class="crud-form-control"
                 type="tel"
                 placeholder="(00) 00000-0000"
@@ -155,6 +167,7 @@
               <input
                 id="emailId"
                 name="emailId"
+                formControlName="emailId"
                 class="crud-form-control"
                 type="email"
                 placeholder="contato@empresa.com"
@@ -170,13 +183,173 @@
             >
               Cancelar
             </button>
-            <button class="crud-btn crud-btn-primary" type="submit">
-              <i class="bi bi-check2" aria-hidden="true"></i>
-              Salvar projeto
-            </button>
+            @if (currentProjectId == 0) {
+              <button class="crud-btn crud-btn-primary" type="button" (click)="saveProject()">
+                <i class="bi bi-check2" aria-hidden="true"></i>
+                Salvar projeto
+              </button>
+            } @else {
+              <button class="crud-btn crud-btn-secondary" type="button" (click)="editProject()">
+                <i class="bi bi-check2" aria-hidden="true"></i>
+                Editar projeto
+              </button>
+            }
           </div>
         </form>
       </div>
     }
+  </div>
+
+  <div
+    class="project-assignment-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="assignment-title"
+  >
+    <label
+      class="project-assignment-backdrop"
+      for="project-assignment-modal"
+      aria-label="Fechar modal"
+    ></label>
+    <section class="project-assignment-panel" aria-labelledby="assignment-title">
+      <div class="project-assignment-heading">
+        <div>
+          <span class="projects-eyebrow">Equipe do projeto</span>
+          <h2 id="assignment-title">Funcionários atribuídos</h2>
+          <p>Consulte a equipe atual e adicione novos colaboradores ao projeto.</p>
+        </div>
+        @if (currentSelectedProjectEmployee().length > 0) {
+          <span class="crud-status crud-status-active">
+            {{ currentSelectedProjectEmployee().length }} funcionários
+          </span>
+        }
+      </div>
+
+      <form class="crud-form-shell project-assignment-form">
+        <div class="project-assignment-form-heading">
+          <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+              <h3>Adicionar funcionário</h3>
+              <p>Preencha os dados para vincular um colaborador ao projeto selecionado.</p>
+            </div>
+            <button class="crud-btn crud-btn-primary" type="button" (click)="assignEmployee()">
+              <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
+              Adicionar funcionário
+            </button>
+          </div>
+        </div>
+        <div class="crud-form-grid">
+          <div class="crud-form-field">
+            <label class="crud-form-label" for="assignmentEmpId">Funcionário</label>
+            <select
+              id="assignmentEmpId"
+              name="empId"
+              [(ngModel)]="assignEmployeeObj.empId"
+              class="crud-form-control"
+            >
+              <option value="0" selected>Selecione o funcionário</option>
+              @for (item of empList$ | async; track $index) {
+                <option [value]="item.employeeId">{{ item.employeeName }}</option>
+              }
+            </select>
+          </div>
+          <div class="crud-form-field">
+            <label class="crud-form-label" for="assignmentRole">Função no projeto</label>
+            <input
+              id="assignmentRole"
+              name="role"
+              [(ngModel)]="assignEmployeeObj.role"
+              class="crud-form-control"
+              type="text"
+              placeholder="Ex.: Desenvolvedor"
+            />
+          </div>
+          <div class="crud-form-field">
+            <label class="crud-form-label" for="assignmentDate">Data de atribuição</label>
+            <input
+              id="assignmentDate"
+              name="assignedDate"
+              [(ngModel)]="assignEmployeeObj.assignedDate"
+              class="crud-form-control"
+              type="date"
+            />
+          </div>
+          <div class="crud-form-field">
+            <label class="crud-form-label" for="assignmentRole">Funcionário ativo</label>
+            <div class="project-assignment-status">
+              <div>
+                <small>colaborador atue neste projeto.</small>
+              </div>
+              <input
+                id="assignmentActive"
+                name="isActive"
+                [(ngModel)]="assignEmployeeObj.isActive"
+                class="form-check-input"
+                type="checkbox"
+                checked
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="crud-table-shell mt-3">
+        <div class="crud-table-scroll">
+          <table class="crud-table project-assignment-table">
+            <thead>
+              <tr>
+                <th scope="col">Funcionário</th>
+                <th scope="col">Função</th>
+                <th scope="col">Data de atribuição</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of currentSelectedProjectEmployee(); track $index) {
+                <tr>
+                  <td>
+                    <span class="crud-avatar">
+                      {{ getProjectNameInitials(item.employeeName) }}
+                    </span>
+                    <strong>{{ item.employeeName }}</strong>
+                  </td>
+                  <td>{{ item.role }}</td>
+                  <td>{{ item.assignedDate | date: 'dd MMM. yyyy' : '' : 'pt-BR' }}</td>
+                  <td>
+                    <span
+                      class="crud-status crud-status-{{ item.isActive ? 'active' : 'inactive' }}"
+                    >
+                      {{ item.isActive ? 'Ativo' : 'Inativo' }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="crud-table-actions">
+                      <button
+                        class="crud-btn crud-btn-danger crud-btn-icon"
+                        type="button"
+                        aria-label="Remover João Silva"
+                        title="Remover"
+                        (click)="deleteProjectEmployee(item.empProjectId)"
+                      >
+                        <i class="bi bi-person-dash" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="5">Nenhum funcionário atribuído ainda</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="project-assignment-modal-footer">
+        <label class="crud-btn crud-btn-secondary" for="project-assignment-modal">Fechar</label>
+      </div>
+    </section>
   </div>
 </section>
