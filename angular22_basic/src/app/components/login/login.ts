@@ -22,6 +22,7 @@ export class Login {
       next: (res: any) => {
         debugger;
         localStorage.setItem('angular22User', res.data.emailId);
+        localStorage.setItem('loginToken', res.data.token);
         this.router.navigateByUrl('/admin/databinding');
       },
       error: (err: any) => {

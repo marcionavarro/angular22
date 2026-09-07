@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, ChangeDetectionStrategy, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,13 +9,26 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './data-binding.css',
 })
-export class DataBinding {
+export class DataBinding implements OnInit {
   productName: string = 'Headphone';
   productPrice: number = 1200;
   maxAllowedQuantity: number = 5;
   isProductActive = false;
 
   myDynamicType = 'button';
+
+  http = inject(HttpClient);
+  userList = signal<any[]>([]);
+
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    this.http.get('https://api.freeprojectapi.com/api/UserApp/GetAllUsers').subscribe({
+      next: (res: any) => (this.userList = res.data),
+    });
+  }
 
   showWelcomeText() {
     alert('Bem vindo v22');
