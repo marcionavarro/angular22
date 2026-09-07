@@ -12,60 +12,74 @@ import { GetAPIEx } from './components/get-apiex/get-apiex';
 import { ClientCrud } from './components/client-crud/client-crud';
 import { PipeEx } from './components/pipe-ex/pipe-ex';
 import { LifeCycle } from './components/life-cycle/life-cycle';
+import { Login } from './components/login/login';
+import { Layout } from './components/layout/layout';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'databinding',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
-    path: 'variables',
-    component: Variables,
+    path: 'login',
+    component: Login,
   },
   {
-    path: 'databinding',
-    component: DataBinding,
-  },
-  {
-    path: 'directives',
-    component: DirectiveExp,
-  },
-  {
-    path: 'control-flow',
-    component: ControlFlow,
-  },
-  {
-    path: 'template-form',
-    component: TemForm,
-  },
-  {
-    path: 'reactive-form',
-    component: ReactiveFormEx,
-  },
-  {
-    path: 'signal-basic',
-    component: SignalBasic,
-  },
-  {
-    path: 'signal-form',
-    component: SignalFormEx,
-  },
-  {
-    path: 'get-api',
-    component: GetAPIEx,
-  },
-  {
-    path: 'client-crud',
-    component: ClientCrud,
-  },
-  {
-    path: 'pipe',
-    component: PipeEx,
-  },
-  {
-    path: 'lifcycle',
-    component: LifeCycle,
+    path: 'admin',
+    component: Layout,
+    children: [
+      {
+        path: 'variables',
+        component: Variables,
+      },
+      {
+        path: 'databinding',
+        component: DataBinding,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'directives',
+        component: DirectiveExp,
+      },
+      {
+        path: 'control-flow',
+        component: ControlFlow,
+      },
+      {
+        path: 'template-form',
+        component: TemForm,
+      },
+      {
+        path: 'reactive-form',
+        component: ReactiveFormEx,
+      },
+      {
+        path: 'signal-basic',
+        component: SignalBasic,
+      },
+      {
+        path: 'signal-form',
+        component: SignalFormEx,
+      },
+      {
+        path: 'get-api',
+        component: GetAPIEx,
+      },
+      {
+        path: 'client-crud',
+        component: ClientCrud,
+      },
+      {
+        path: 'pipe',
+        component: PipeEx,
+      },
+      {
+        path: 'lifcycle',
+        component: LifeCycle,
+      },
+    ],
   },
   {
     path: '**',

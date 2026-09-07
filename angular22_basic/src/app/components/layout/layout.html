@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mynavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="variables" routerLinkActive="active">Variable</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'databinding'" routerLinkActive="active">
+            Data-Bindings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="directives" routerLinkActive="active">Directives</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="control-flow" routerLinkActive="active">Control Flow</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="template-form" routerLinkActive="active">Template Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="reactive-form" routerLinkActive="active">Reactive Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="signal-basic" routerLinkActive="active">Signal Basic</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="signal-form" routerLinkActive="active">Signal Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="get-api" routerLinkActive="active">Get API</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="client-crud" routerLinkActive="active">Client Crud</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="pipe" routerLinkActive="active">Pipe</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="lifcycle" routerLinkActive="active">Life Cycle</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <button class="btn btn-secondary btn-sm text-white me-2">{{ loggedUserEmail }}</button>
+        <button class="btn btn-primary" type="button" (click)="onLogOff()">Sair</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
