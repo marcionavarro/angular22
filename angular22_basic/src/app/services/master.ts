@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
+import { LoginModelApi } from '../components/login/login';
 
 export interface IClient {
   clientId: number;
@@ -55,5 +56,9 @@ export class Master {
     debugger;
     const asterisctDat = '**** **** ****';
     return asterisctDat + ' ' + cardNo.substring(12);
+  }
+
+  loginUser(obj: LoginModelApi) {
+    return this.http.post<LoginModelApi>('https://api.freeprojectapi.com/api/UserApp/login', obj);
   }
 }
