@@ -3,10 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IClient, Master } from '../../services/master';
+import { PageHeader } from '../../resuabbles/page-header/page-header';
+import { Card } from '../../resuabbles/card/card';
+import { MyButton } from '../../resuabbles/my-button/my-button';
 
 @Component({
   selector: 'app-client-crud',
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, DatePipe, PageHeader, Card, MyButton],
   templateUrl: './client-crud.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './client-crud.css',

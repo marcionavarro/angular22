@@ -1,10 +1,9 @@
-import { JsonPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tem-form',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule],
   templateUrl: './tem-form.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './tem-form.css',

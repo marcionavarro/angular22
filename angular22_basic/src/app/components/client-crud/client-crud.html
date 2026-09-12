@@ -1,63 +1,79 @@
+<app-page-header
+  [headerTitle]="'Component Reutizável tela cliente crud'"
+  [headerText]="'Esta é a pagina do cliente onde acontece o crud'"
+></app-page-header>
+
+<div class="row my-4">
+  <div class="col-3">
+    <app-my-button [btnText]="'Salvar usuário'" [btnVariant]="'success'"></app-my-button>
+  </div>
+  <div class="col-3">
+    <app-my-button [btnText]="'Atualizar usuário'" [btnVariant]="'primary'"></app-my-button>
+  </div>
+  <div class="col-3">
+    <app-my-button [btnText]="'Atualizar usuário'" [btnVariant]="'danger'"></app-my-button>
+  </div>
+  <div class="col-3">
+    <app-my-button [btnText]="'Abrir usuário'"></app-my-button>
+  </div>
+</div>
+
 <div class="container-fluid py-4">
   <div class="row g-4">
     <!-- TABELA - 8 COLUNAS -->
     <div class="col-md-8">
-      <div class="card shadow-sm">
-        <div class="card-header">
-          <h5 class="mb-0">Lista de Clientes -- {{ formatedCardNo }}</h5>
-        </div>
+      <app-card [headerText]="'Lista de Clientes'">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nome do Cliente</th>
+                <th>Empresa</th>
+                <th>Responsável</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Data de Criação</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
 
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover align-middle">
-              <thead class="table-dark">
+            <tbody>
+              @for (item of clientList(); track $index) {
                 <tr>
-                  <th>ID</th>
-                  <th>Nome do Cliente</th>
-                  <th>Empresa</th>
-                  <th>Responsável</th>
-                  <th>Telefone</th>
-                  <th>E-mail</th>
-                  <th>Data de Criação</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
+                  <td>{{ item.clientId }}</td>
+                  <td>{{ item.clientName }}</td>
+                  <td>{{ item.businessName }}</td>
+                  <td>{{ item.contactPerson }}</td>
+                  <td>{{ item.contactNo }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.createdDate | date: 'dd/MM/yyyy' }}</td>
+                  <td>
+                    <app-my-button
+                      [btnText]="'Editar'"
+                      [btnVariant]="'primary'"
+                      (onbtnClick)="onEditClient(item)"
+                    >
+                    </app-my-button>
 
-              <tbody>
-                @for (item of clientList(); track $index) {
-                  <tr>
-                    <td>{{ item.clientId }}</td>
-                    <td>{{ item.clientName }}</td>
-                    <td>{{ item.businessName }}</td>
-                    <td>{{ item.contactPerson }}</td>
-                    <td>{{ item.contactNo }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.createdDate | date: 'dd/MM/yyyy' }}</td>
-                    <td>
-                      <button class="btn btn-sm btn-primary" (click)="onEditClient(item)">
-                        Editar
-                      </button>
-                      <button class="btn btn-sm btn-danger" (click)="onDeleteClient(item.clientId)">
-                        Excluir
-                      </button>
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </div>
+                    <app-my-button
+                      [btnText]="'Excluir'"
+                      [btnVariant]="'danger'"
+                      (onbtnClick)="onDeleteClient(item.clientId)"
+                    ></app-my-button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
         </div>
-      </div>
+      </app-card>
     </div>
 
     <!-- FORMULÁRIO - 4 COLUNAS -->
     <div class="col-md-4">
       <div class="card shadow-sm">
-        <div class="card-header">
-          <h5 class="mb-0">Cadastro de Cliente</h5>
-        </div>
-
-        <div class="card-body">
+        <app-card [headerText]="'Cadastro de Cliente'">
           <form>
             <div class="row g-3">
               <!-- COLUNA 1 -->
@@ -180,7 +196,7 @@
               </div>
             </div>
           </form>
-        </div>
+        </app-card>
       </div>
     </div>
   </div>

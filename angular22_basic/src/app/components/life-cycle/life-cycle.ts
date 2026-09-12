@@ -8,9 +8,10 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { PageHeader } from '../../resuabbles/page-header/page-header';
 
 @Component({
-  imports: [],
+  imports: [PageHeader],
   selector: 'app-life-cycle',
   styleUrl: './life-cycle.css',
   templateUrl: './life-cycle.html',
