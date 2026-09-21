@@ -11,10 +11,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { PageHeader } from '../../resuabbles/page-header/page-header';
+import { Hightlight } from '../../customDirectives/hightlight';
 import { PipeEx } from '../pipe-ex/pipe-ex';
+import { CopyPaste } from '../../customDirectives/copy-paste';
+import { NumbersOnly } from '../../customDirectives/numbers-only';
 
 @Component({
-  imports: [PageHeader, PipeEx],
+  imports: [PageHeader, Hightlight, CopyPaste, PipeEx, NumbersOnly],
   selector: 'app-life-cycle',
   styleUrl: './life-cycle.css',
   templateUrl: './life-cycle.html',
@@ -34,7 +37,6 @@ export class LifeCycle
   @ViewChild(PipeEx) pipeCompInstance!: PipeEx;
 
   constructor() {
-    // O construtor é chamado quando a instância do componente é criada, mas antes de qualquer ciclo de vida do Angular ser executado.
     console.log('constructor executed');
   }
 
