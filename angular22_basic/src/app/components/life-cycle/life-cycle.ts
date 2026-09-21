@@ -5,13 +5,16 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
+  ElementRef,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { PageHeader } from '../../resuabbles/page-header/page-header';
+import { PipeEx } from '../pipe-ex/pipe-ex';
 
 @Component({
-  imports: [PageHeader],
+  imports: [PageHeader, PipeEx],
   selector: 'app-life-cycle',
   styleUrl: './life-cycle.css',
   templateUrl: './life-cycle.html',
@@ -26,9 +29,34 @@ export class LifeCycle
     DoCheck,
     OnDestroy
 {
+  @ViewChild('temName') textRef!: ElementRef;
+  @ViewChild('div1Tem') div1Element!: ElementRef;
+  @ViewChild(PipeEx) pipeCompInstance!: PipeEx;
+
   constructor() {
     // O construtor é chamado quando a instância do componente é criada, mas antes de qualquer ciclo de vida do Angular ser executado.
     console.log('constructor executed');
+  }
+
+  readPipeCom() {
+    debugger;
+    if (this.pipeCompInstance) {
+      const data = this.pipeCompInstance.currentData;
+    }
+  }
+
+  readTextValue() {
+    debugger;
+    if (this.textRef) {
+      const value = this.textRef.nativeElement.value;
+      alert(value);
+    }
+  }
+
+  addBgColor(color: string) {
+    if (this.div1Element) {
+      this.div1Element.nativeElement.style.backgroundColor = color;
+    }
   }
 
   ngOnInit(): void {
@@ -49,6 +77,9 @@ export class LifeCycle
 
   ngAfterViewInit(): void {
     // Os filhos da view são inicializados e a view é renderizada, portanto, podemos acessar os filhos da view aqui.
+    if (this.textRef) {
+      this.textRef.nativeElement.value = 'React JS';
+    }
     console.log('ngAfterViewInit executed');
   }
 

@@ -3,3 +3,32 @@
   [headerText]="'Esta é uma página onde veremos o exemplo de vida'"
 >
 </app-page-header>
+
+<div class="row">
+  <div class="col-3">
+    <input type="text" #temName class="form-control" placeholder="Digite um texto" />
+  </div>
+  <div class="col-2">
+    <button class="btn btn-warning" (click)="readTextValue()">Ler</button>
+  </div>
+</div>
+<hr />
+
+<div class="row">
+  <div class="col-4" #div1Tem>
+    <div class="p-3">Div11</div>
+  </div>
+  <div class="col-3">
+    <button class="btn btn-warning" (click)="addBgColor('red')">Adicionar Vernelho</button>
+    <button class="btn btn-warning" (click)="addBgColor('blue')">Adicionar Azul</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <!-- <app-pipe-ex></app-pipe-ex> -->
+  </div>
+  <div class="col-6">
+    <button class="btn btn-success" (click)="readPipeCom()">Pipe Data</button>
+  </div>
+</div>
