@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { LoginModelApi } from '../components/login/login';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export interface IClient {
   clientId: number;
@@ -24,6 +25,9 @@ export interface IClientGet {
 export class Master {
   loggedUser: string = '';
   http = inject(HttpClient);
+
+  $selectedRole: Subject<string> = new Subject();
+  $selectedRoleBehaviourSub: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   getClients() {
     return this.http.get<IClientGet>(

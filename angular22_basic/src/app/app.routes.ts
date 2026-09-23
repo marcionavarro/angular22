@@ -15,6 +15,7 @@ import { LifeCycle } from './components/life-cycle/life-cycle';
 import { Login } from './components/login/login';
 import { Layout } from './components/layout/layout';
 import { authGuard } from './guards/auth-guard';
+import { RxjsEx } from './components/rxjs-ex/rxjs-ex';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'directives',
         component: DirectiveExp,
+      },
+      {
+        path: 'rxjs',
+        component: RxjsEx,
       },
       {
         path: 'control-flow',

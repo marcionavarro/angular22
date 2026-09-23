@@ -6,6 +6,7 @@ import {
   Component,
   DoCheck,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -15,6 +16,7 @@ import { Hightlight } from '../../customDirectives/hightlight';
 import { PipeEx } from '../pipe-ex/pipe-ex';
 import { CopyPaste } from '../../customDirectives/copy-paste';
 import { NumbersOnly } from '../../customDirectives/numbers-only';
+import { Master } from '../../services/master';
 
 @Component({
   imports: [PageHeader, Hightlight, CopyPaste, PipeEx, NumbersOnly],
@@ -35,9 +37,21 @@ export class LifeCycle
   @ViewChild('temName') textRef!: ElementRef;
   @ViewChild('div1Tem') div1Element!: ElementRef;
   @ViewChild(PipeEx) pipeCompInstance!: PipeEx;
+  masterService = inject(Master);
 
   constructor() {
     console.log('constructor executed');
+    this.masterService.$selectedRole.subscribe({
+      next: (res: string) => {
+        debugger;
+      },
+    });
+
+    this.masterService.$selectedRoleBehaviourSub.subscribe({
+      next: (res: string) => {
+        debugger;
+      },
+    });
   }
 
   readPipeCom() {

@@ -49,8 +49,15 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="lifcycle" routerLinkActive="active">Life Cycle</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rxjs" routerLinkActive="active">RxJS</a>
+        </li>
       </ul>
       <form class="d-flex">
+        <select name="" id="" (change)="onRoleChanges($event)">
+          <option value="Admin">Admin</option>
+          <option value="Guest">Guest</option>
+        </select>
         <button class="btn btn-secondary btn-sm text-white me-2">{{ loggedUserEmail }}</button>
         <button class="btn btn-primary" type="button" (click)="onLogOff()">Sair</button>
       </form>
