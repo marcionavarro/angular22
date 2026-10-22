@@ -16,6 +16,7 @@ import { Login } from './components/login/login';
 import { Layout } from './components/layout/layout';
 import { authGuard } from './guards/auth-guard';
 import { RxjsEx } from './components/rxjs-ex/rxjs-ex';
+import { NgTemContainer } from './components/ng-tem-container/ng-tem-container';
 
 export const routes: Routes = [
   {
@@ -83,6 +84,10 @@ export const routes: Routes = [
       {
         path: 'lifcycle',
         component: LifeCycle,
+      },
+      {
+        path: 'ng-tem-container',
+        component: NgTemContainer,
       },
     ],
   },
