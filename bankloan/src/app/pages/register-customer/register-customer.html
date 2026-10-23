@@ -1,0 +1,91 @@
+<main class="bg-light min-vh-100 d-flex align-items-center py-5">
+  <section class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <span
+                class="badge rounded-pill text-bg-primary-subtle text-primary-emphasis px-3 py-2 mb-3"
+              >
+                Banco Horizonte
+              </span>
+              <h1 class="h3 fw-bold text-dark mb-2">Criar conta</h1>
+              <p class="text-secondary mb-0">Preencha seus dados para se cadastrar.</p>
+            </div>
+
+            <form>
+              <div class="mb-3">
+                <label for="userName" class="form-label fw-medium">Nome de usuário</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="userName"
+                  [(ngModel)]="newUserObj.username"
+                  name="userName"
+                  placeholder="Ex.: maria.silva"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="fullName" class="form-label fw-medium">Nome completo</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="fullName"
+                  [(ngModel)]="newUserObj.fullName"
+                  name="fullName"
+                  placeholder="Seu nome completo"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="emailId" class="form-label fw-medium">E-mail</label>
+                <input
+                  type="email"
+                  class="form-control form-control-lg"
+                  id="emailId"
+                  [(ngModel)]="newUserObj.emailId"
+                  name="emailId"
+                  placeholder="voce@exemplo.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="form-label fw-medium">Senha</label>
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="password"
+                  [(ngModel)]="newUserObj.password"
+                  name="password"
+                  placeholder="Crie uma senha"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-lg rounded-pill w-100"
+                (click)="onSaveCustomer()"
+              >
+                Criar cadastro
+              </button>
+            </form>
+
+            <p class="small text-secondary text-center mt-4 mb-0">
+              Seus dados serão usados para criar seu cadastro no aplicativo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

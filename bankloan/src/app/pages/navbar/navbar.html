@@ -16,17 +16,35 @@
         routerLink="/home"
         >Início</a
       >
+
       <a
         class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
-        href="#sobre"
-        >Sobre o app</a
+        routerLink="register-customer"
       >
-      <a
-        class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
-        href="#vantagens"
-        >Vantagens</a
-      >
+        Registrar
+      </a>
+
+      @if (!loggedUserData()) {
+        <a
+          class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
+          routerLink="login"
+        >
+          Login
+        </a>
+      }
       <a class="btn btn-primary rounded-pill px-4" routerLink="/login">Solicitar empréstimo</a>
+      @if (loggedUserData(); as user) {
+        <div class="d-flex align-items-center gap-2 border-start ps-3">
+          <span class="small fw-semibold text-dark">{{ user?.userName }}</span>
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm rounded-pill px-3"
+            (click)="onLogOff()"
+          >
+            Sair
+          </button>
+        </div>
+      }
     </div>
   </div>
 </nav>

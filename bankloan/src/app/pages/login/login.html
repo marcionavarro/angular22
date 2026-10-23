@@ -1,1 +1,66 @@
-<p>login works!</p>
+<main class="bg-light min-vh-100 d-flex align-items-center py-5">
+  <section class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <span
+                class="badge rounded-pill text-bg-primary-subtle text-primary-emphasis px-3 py-2 mb-3"
+              >
+                Banco Horizonte
+              </span>
+              <h1 class="h3 fw-bold text-dark mb-2">Boas-vindas de volta</h1>
+              <p class="text-secondary mb-0">Entre na sua conta para continuar.</p>
+            </div>
+
+            <form (submit)="onLoginUser()">
+              <div class="mb-3">
+                <label for="userName" class="form-label fw-medium">Nome de usuário</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="userName"
+                  [(ngModel)]="loginObj.userName"
+                  name="userName"
+                  placeholder="Digite seu nome de usuário"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="form-label fw-medium">Senha</label>
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="password"
+                  [(ngModel)]="loginObj.password"
+                  name="password"
+                  placeholder="Digite sua senha"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100">
+                Entrar
+              </button>
+            </form>
+
+            <p class="small text-secondary text-center mt-4 mb-0">
+              Ainda não tem uma conta?
+              <a
+                href="#"
+                class="link-primary fw-semibold text-decoration-none"
+                routerLink="/register-customer"
+              >
+                Criar cadastro
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
