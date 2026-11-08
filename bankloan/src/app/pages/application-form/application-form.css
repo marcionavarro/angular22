@@ -1,0 +1,169 @@
+.application-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  color: #172b3a;
+}
+
+.application-shell {
+  max-width: 1240px;
+}
+
+.page-header {
+  padding: 0.25rem 0.15rem;
+}
+
+.eyebrow {
+  color: #c69245;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.page-description,
+.section-heading p {
+  color: #7e8993;
+  font-size: 0.8rem;
+}
+
+.page-header h1 {
+  color: #193247;
+  font-weight: 700;
+}
+
+.form-section {
+  margin-bottom: 0.75rem;
+  padding: 1rem 1.15rem 1.1rem;
+  background: #fff;
+  border: 1px solid #e8edf1;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.15rem 0.65rem rgba(31, 51, 68, 0.04);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.section-number {
+  color: #c69245;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.section-heading h2 {
+  margin: 0 0 0.15rem;
+  color: #1d3547;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.section-heading p {
+  margin: 0;
+}
+
+.form-label {
+  margin-bottom: 0.3rem;
+  color: #415361;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+  min-height: 36px;
+  border-color: #e0e6ea;
+  color: #2b3d4a;
+  font-size: 0.82rem;
+}
+
+.form-control::placeholder {
+  color: #adb6bd;
+}
+
+.form-select {
+  color: #71808a;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #88aaa9;
+  box-shadow: 0 0 0 0.18rem rgba(83, 139, 137, 0.12);
+}
+
+.input-group-text {
+  background: #f6faf9;
+  color: #4a9993;
+  font-weight: 600;
+}
+
+.btn-primary {
+  min-height: 36px;
+  background: #356e78;
+  border-color: #356e78;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #2b5d66;
+  border-color: #2b5d66;
+}
+
+.btn-outline-primary {
+  min-height: 36px;
+  color: #356e78;
+  border-color: #8eb6b4;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.btn-outline-primary:hover {
+  background: #356e78;
+  border-color: #356e78;
+}
+
+.table {
+  color: #40515d;
+  font-size: 0.78rem;
+}
+
+.table thead th {
+  background: #f8fafb;
+  border-bottom-width: 1px;
+  color: #78868f;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.table td,
+.table th {
+  padding: 0.55rem 0.65rem;
+}
+
+.empty-row td {
+  padding: 0.75rem;
+  color: #9aa5ac;
+  text-align: center;
+}
+
+@media (max-width: 575.98px) {
+  .application-page .container-fluid {
+    padding-top: 0.75rem !important;
+  }
+
+  .form-section {
+    padding: 0.85rem;
+  }
+
+  .page-header .btn {
+    width: 100%;
+  }
+}

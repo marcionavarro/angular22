@@ -17,6 +17,7 @@ export class Login {
   router = inject(Router);
 
   onLoginUser() {
+    debugger;
     this.masterService.onLogin(this.loginObj).subscribe({
       next: (res: IApiResponseModel) => {
         if (res.result) {

@@ -1,1 +1,380 @@
-<p>application-form works!</p>
+<main class="application-page">
+  <div class="container-fluid px-3 px-lg-4 py-3">
+    <form class="application-shell mx-auto" [formGroup]="applicationForm">
+      <header
+        class="page-header d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3"
+      >
+        <div>
+          <p class="eyebrow mb-1">Novo cadastro</p>
+          <h1 class="h4 mb-0">Cadastro de solicitante</h1>
+          <p class="page-description mb-0">
+            Preencha os dados pessoais, profissionais e financeiros.
+          </p>
+        </div>
+        <button class="btn btn-primary px-4" type="button" (click)="onSaveApplication()">
+          Salvar cadastro
+        </button>
+      </header>
+
+      <!-- <section class="form-section" aria-labelledby="identification-heading">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <div>
+            <h2 id="identification-heading">Identificação</h2>
+            <p>Dados de controle da solicitação.</p>
+          </div>
+        </div>
+        <div class="row g-2">
+          <div class="col-6 col-md-3">
+            <label for="applicantID" class="form-label">ID do solicitante</label>
+            <input
+              id="applicantID"
+              name="applicantID"
+              formControlName="applicantID"
+              class="form-control"
+              type="number"
+              placeholder="0"
+            />
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="customerId" class="form-label">ID do cliente</label>
+            <input
+              id="customerId"
+              name="customerId"
+              formControlName="customerId"
+              class="form-control"
+              type="number"
+              placeholder="0"
+            />
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="applicationStatus" class="form-label">Status da solicitação</label>
+            <select
+              id="applicationStatus"
+              name="applicationStatus"
+              formControlName="applicationStatus"
+              class="form-select"
+            >
+              <option value="" selected>Selecione o status</option>
+              <option>Em análise</option>
+              <option>Aprovada</option>
+              <option>Reprovada</option>
+              <option>Pendente</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="dateApplied" class="form-label">Data da solicitação</label>
+            <input
+              id="dateApplied"
+              name="dateApplied"
+              formControlName="dateApplied"
+              class="form-control"
+              type="date"
+            />
+          </div>
+        </div>
+      </section> -->
+
+      <section class="form-section" aria-labelledby="applicant-heading">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <div>
+            <h2 id="applicant-heading">Dados do solicitante</h2>
+            <p>Informações pessoais e de contato.</p>
+          </div>
+        </div>
+        <div class="row g-2">
+          <div class="col-12 col-md-6">
+            <label for="fullName" class="form-label">Nome completo</label>
+            <input
+              id="fullName"
+              name="fullName"
+              formControlName="fullName"
+              class="form-control"
+              type="text"
+              placeholder="Digite o nome completo"
+            />
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="panCard" class="form-label">CPF / PAN card</label>
+            <input
+              id="panCard"
+              name="panCard"
+              formControlName="panCard"
+              class="form-control"
+              type="text"
+              placeholder="000.000.000-00"
+            />
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="dateOfBirth" class="form-label">Data de nascimento</label>
+            <input
+              id="dateOfBirth"
+              name="dateOfBirth"
+              formControlName="dateOfBirth"
+              class="form-control"
+              type="date"
+            />
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="email" class="form-label">E-mail</label>
+            <input
+              id="email"
+              name="email"
+              formControlName="email"
+              class="form-control"
+              type="email"
+              placeholder="voce@exemplo.com"
+            />
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="phone" class="form-label">Telefone</label>
+            <input
+              id="phone"
+              name="phone"
+              formControlName="phone"
+              class="form-control"
+              type="tel"
+              placeholder="(00) 00000-0000"
+            />
+          </div>
+          <div class="col-12 col-md-5">
+            <label for="address" class="form-label">Endereço</label>
+            <input
+              id="address"
+              name="address"
+              formControlName="address"
+              class="form-control"
+              type="text"
+              placeholder="Rua e número"
+            />
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="city" class="form-label">Cidade</label>
+            <input
+              id="city"
+              name="city"
+              formControlName="city"
+              class="form-control"
+              type="text"
+              placeholder="Digite a cidade"
+            />
+          </div>
+          <div class="col-6 col-md-4">
+            <label for="state" class="form-label">Estado</label>
+            <select id="state" name="state" formControlName="state" class="form-select">
+              <option value="" selected>Selecione o estado</option>
+              <option>AC</option>
+              <option>AL</option>
+              <option>AP</option>
+              <option>AM</option>
+              <option>BA</option>
+              <option>CE</option>
+              <option>DF</option>
+              <option>ES</option>
+              <option>GO</option>
+              <option>MA</option>
+              <option>MT</option>
+              <option>MS</option>
+              <option>MG</option>
+              <option>PA</option>
+              <option>PB</option>
+              <option>PR</option>
+              <option>PE</option>
+              <option>PI</option>
+              <option>RJ</option>
+              <option>RN</option>
+              <option>RS</option>
+              <option>RO</option>
+              <option>RR</option>
+              <option>SC</option>
+              <option>SP</option>
+              <option>SE</option>
+              <option>TO</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-4">
+            <label for="zipCode" class="form-label">CEP</label>
+            <input
+              id="zipCode"
+              name="zipCode"
+              formControlName="zipCode"
+              class="form-control"
+              type="text"
+              placeholder="00000-000"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="financial-heading">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <div>
+            <h2 id="financial-heading">Perfil financeiro</h2>
+            <p>Informações profissionais e de capacidade financeira.</p>
+          </div>
+        </div>
+        <div class="row g-2">
+          <div class="col-12 col-md-3">
+            <label for="annualIncome" class="form-label">Renda anual (R$)</label>
+            <div class="input-group">
+              <span class="input-group-text">R$</span>
+              <input
+                id="annualIncome"
+                name="annualIncome"
+                formControlName="annualIncome"
+                class="form-control"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="0,00"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="employmentStatus" class="form-label">Situação profissional</label>
+            <select
+              id="employmentStatus"
+              name="employmentStatus"
+              formControlName="employmentStatus"
+              class="form-select"
+            >
+              <option value="" selected>Selecione a situação</option>
+              <option>Empregado</option>
+              <option>Autônomo</option>
+              <option>Empresário</option>
+              <option>Aposentado</option>
+              <option>Desempregado</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2">
+            <label for="creditScore" class="form-label">Score de crédito</label>
+            <input
+              id="creditScore"
+              name="creditScore"
+              formControlName="creditScore"
+              class="form-control"
+              type="number"
+              min="0"
+              placeholder="Ex.: 750"
+            />
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="assets" class="form-label">Patrimônio / ativos</label>
+            <input
+              id="assets"
+              name="assets"
+              formControlName="assets"
+              class="form-control"
+              type="text"
+              placeholder="Descreva os bens e ativos"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="loans-heading" formArrayName="Loans">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <div>
+            <h2 id="loans-heading">Empréstimos existentes</h2>
+            <p>Informe os empréstimos atuais do solicitante.</p>
+          </div>
+          <button
+            class="btn btn-outline-primary ms-auto"
+            type="button"
+            aria-label="Adicionar empréstimo"
+            (click)="addNewLoanForm()"
+          >
+            +
+          </button>
+        </div>
+        @for (loan of loanDetails.controls; let srNo = $index; track $index) {
+          <ng-container [formGroupName]="srNo">
+            <div class="row g-2 align-items-end">
+              <!-- <div class="col-6 col-md-2">
+                <label for="loanID" class="form-label">ID do empréstimo</label>
+                <input
+                  id="loanID"
+                  name="loanID"
+                  class="form-control"
+                  type="number"
+                  placeholder="0"
+                />
+              </div>
+              <div class="col-6 col-md-2">
+                <label for="loanApplicantID" class="form-label">ID solicitante</label>
+                <input
+                  id="loanApplicantID"
+                  name="loanApplicantID"
+                  class="form-control"
+                  type="number"
+                  placeholder="0"
+                />
+              </div> -->
+              <div class="col-12 col-md-4">
+                <label for="bankName" class="form-label">Nome do banco</label>
+                <input
+                  id="bankName"
+                  name="bankName"
+                  formControlName="bankName"
+                  class="form-control"
+                  type="text"
+                  placeholder="Ex.: Banco Nacional"
+                />
+              </div>
+              <div class="col-6 col-md-4">
+                <label for="loanAmount" class="form-label">Valor (R$)</label>
+                <input
+                  id="loanAmount"
+                  name="loanAmount"
+                  formControlName="loanAmount"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="0,00"
+                />
+              </div>
+              <div class="col-6 col-md-4">
+                <label for="emi" class="form-label">EMI (R$)</label>
+                <input
+                  id="emi"
+                  name="emi"
+                  formControlName="emi"
+                  class="form-control"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="0,00"
+                />
+              </div>
+            </div>
+          </ng-container>
+        }
+        <div class="table-responsive mt-3">
+          <table class="table table-sm align-middle mb-0">
+            <caption class="visually-hidden">
+              Empréstimos adicionados
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Banco</th>
+                <th scope="col" class="text-end">Valor</th>
+                <th scope="col" class="text-end">EMI</th>
+                <th scope="col" class="text-end">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row">
+                <td colspan="5">Nenhum empréstimo adicionado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </form>
+  </div>
+</main>
