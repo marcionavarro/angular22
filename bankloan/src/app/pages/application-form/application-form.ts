@@ -71,8 +71,8 @@ export class ApplicationForm {
     this.masterService.saveLoanApplication(formValue).subscribe({
       next: (res: IApiResponseModel) => {
         if (res.result) {
-          alert('Aplicativo cadastrado com sucesso!');
-          this.router.navigateByUrl('/application-list');
+          alert('Aplicação cadastrado com sucesso!');
+          this.router.navigate(['/application-list']);
         } else {
           alert(res.message);
         }

@@ -16,26 +16,33 @@
     <section class="list-toolbar mb-4" aria-label="Filtros de solicitações">
       <div class="row g-3 align-items-end">
         <div class="col-12 col-md">
-          <label for="application-search" class="form-label">Buscar solicitação</label>
+          <label for="application-search" class="form-label"> Buscar solicitação </label>
           <input
             id="application-search"
+            #applicationSearch
             class="form-control"
             type="search"
-            placeholder="Nome, CPF ou número do pedido"
+            placeholder="Número do cartão ou e-mail"
           />
         </div>
+
         <div class="col-12 col-sm-6 col-md-3">
           <label for="status-filter" class="form-label">Status</label>
-          <select id="status-filter" class="form-select">
-            <option selected>Todos os status</option>
-            <option>Em análise</option>
-            <option>Pendente</option>
-            <option>Aprovada</option>
-            <option>Reprovada</option>
+          <select id="status-filter" #statusFilter class="form-select">
+            <option value="" selected>Todos os status</option>
+            <option value="New">Novo</option>
+            <option value="Approved">Aprovado</option>
+            <option value="Reject">Rejeitado</option>
+            <option value="Closed">Encerrado</option>
           </select>
         </div>
+
         <div class="col-12 col-sm-6 col-md-auto">
-          <button class="btn btn-outline-primary filter-button w-100" type="button">
+          <button
+            class="btn btn-outline-primary filter-button w-100"
+            type="button"
+            (click)="filterApplications(applicationSearch.value, statusFilter.value)"
+          >
             Filtrar solicitações
           </button>
         </div>
@@ -46,62 +53,92 @@
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <div>
           <h2 id="results-heading" class="section-title mb-0">Solicitações recentes</h2>
-          <p class="results-caption mb-0">3 solicitações exibidas</p>
+          <p class="results-caption mb-0">
+            {{ filteredApplications().length }} solicitações exibidas
+          </p>
         </div>
+
         <label class="sort-control d-flex align-items-center gap-2">
           <span>Ordenar por</span>
-          <select class="form-select form-select-sm" aria-label="Ordenar solicitações">
-            <option selected>Mais recentes</option>
-            <option>Mais antigas</option>
-            <option>Maior valor</option>
+          <select
+            #sortOrder
+            class="form-select form-select-sm"
+            aria-label="Ordenar solicitações"
+            (change)="sortApplications(sortOrder.value === 'oldest')"
+          >
+            <option value="newest" selected>Mais recentes</option>
+            <option value="oldest">Mais antigas</option>
           </select>
         </label>
       </div>
 
-      <div class="row g-3">
-        @for (item of applicationList(); track $index) {
+      <!-- Cards -->
+      <div class="row g-3 align-items-start">
+        @for (item of filteredApplications(); track item.applicantID) {
           <div class="col-12 col-lg-6 col-xxl-4">
-            <article class="card application-card h-100">
-              @if (loggedUser.role != 'Customer') {
-                <div class="card-body d-flex flex-column p-4">
-                  <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
-                    <div>
-                      <p class="application-id mb-1">
-                        Solicitação #{{
-                          item.dateApplied | date: 'MMM-yyyy' : '' : 'pt-BR' | uppercase
-                        }}
-                      </p>
-                      <h3 class="applicant-name mb-0">{{ item.fullName }}</h3>
-                    </div>
-                    <span class="status-badge status-review">{{ item.applicationStatus }}</span>
-                  </div>
+            <article class="card application-card">
+              <div class="card-body d-flex flex-column p-4">
+                <!-- Cabeçalho -->
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <p class="application-id mb-1">
+                      Solicitação #{{
+                        item.dateApplied | date: 'MMM-yyyy' : '' : 'pt-BR' | uppercase
+                      }}
+                    </p>
 
-                  <div class="applicant-meta d-flex flex-wrap gap-2 mb-4">
-                    <span>Email: {{ item.email }} </span>
-                    <span aria-hidden="true">·</span>
-                    <span>Aplicação #{{ item.applicantID }}</span>
-                  </div>
-
-                  <div class="loan-summary row g-3 mb-4">
-                    <div class="col-7">
-                      <p class="detail-label mb-1">Telefone</p>
-                      <p class="loan-amount mb-0">{{ item.customerPhone }}</p>
-                    </div>
-                    @if (loggedUser.role == 'Customer') {
-                      <div class="col-5">
-                        <p class="detail-label mb-1">Instituição</p>
-                        <p class="detail-value mb-0">{{ item.assignedToBankEmployee }}</p>
-                      </div>
+                    @if (loggedUser.role !== 'Customer') {
+                      <h3 class="applicant-name mb-0">
+                        {{ item.fullName }}
+                      </h3>
                     } @else {
-                      <div class="col-5">
-                        <p class="detail-label mb-1">Situação profissional</p>
-                        <p class="detail-value mb-0">{{ item.employmentStatus }}</p>
+                      <h3 class="applicant-name mb-0">
+                        {{ item.assignedToBankEmployee }}
+                      </h3>
+                    }
+                  </div>
+
+                  <span class="status-badge status-review">
+                    {{ mapperStatus(item.applicationStatus) }}
+                  </span>
+                </div>
+
+                <!-- Informações básicas -->
+                <div class="applicant-meta d-flex flex-wrap gap-2 mb-4">
+                  @if (loggedUser.role !== 'Customer') {
+                    <span>Email: {{ item.email }}</span>
+                    <span aria-hidden="true">·</span>
+                  }
+
+                  <span>Aplicação #{{ item.applicantID }}</span>
+                </div>
+
+                <!-- Detalhes individuais -->
+                @if (expandedCard === item.applicantID) {
+                  <div class="loan-summary row g-3 mb-4">
+                    @if (loggedUser.role !== 'Customer') {
+                      <div class="col-7">
+                        <p class="detail-label mb-1">Telefone</p>
+                        <p class="loan-amount mb-0">
+                          {{ item.customerPhone }}
+                        </p>
                       </div>
                     }
+
+                    <div class="col-{{ loggedUser.role !== 'Customer' ? 5 : 7 }}">
+                      <p class="detail-label mb-1">Situação profissional</p>
+                      <p class="detail-value mb-0">
+                        {{ item.employmentStatus }}
+                      </p>
+                    </div>
+
                     <div class="col-7">
                       <p class="detail-label mb-1">Número do cartão</p>
-                      <p class="detail-value mb-0">{{ item.panCard }}</p>
+                      <p class="detail-value mb-0">
+                        {{ item.panCard }}
+                      </p>
                     </div>
+
                     <div class="col-5">
                       <p class="detail-label mb-1">Solicitada em</p>
                       <p class="detail-value mb-0">
@@ -109,41 +146,48 @@
                       </p>
                     </div>
                   </div>
+                }
 
-                  <div class="card-actions d-flex flex-wrap gap-2 mt-auto pt-3">
-                    @if (loggedUser.role != 'Customer') {
-                      @if (
-                        item.applicationStatus === 'Reject' ||
-                        item.applicationStatus === 'New' ||
-                        item.applicationStatus === 'Closed'
-                      ) {
-                        <button
-                          class="btn btn-primary flex-grow-1"
-                          type="button"
-                          (click)="changeStatus(item.panCard, 'Approve')"
-                        >
-                          Aprovar
-                        </button>
-                      }
+                <!-- Ações -->
+                <div class="card-actions d-flex flex-wrap gap-2 mt-auto pt-3">
+                  @if (
+                    item.applicationStatus === 'Reject' ||
+                    item.applicationStatus === 'New' ||
+                    item.applicationStatus === 'Closed'
+                  ) {
+                    <button
+                      class="btn btn-primary flex-grow-1"
+                      type="button"
+                      (click)="changeStatus(item.panCard, 'Approve')"
+                    >
+                      Aprovar
+                    </button>
+                  }
 
-                      @if (
-                        item.applicationStatus === 'Approve' ||
-                        item.applicationStatus === 'New' ||
-                        item.applicationStatus === 'Closed'
-                      ) {
-                        <button
-                          class="btn btn-primary flex-grow-1"
-                          type="button"
-                          (click)="changeStatus(item.panCard, 'Reject')"
-                        >
-                          Rejeitar
-                        </button>
-                      }
-                    }
-                    <button class="btn btn-outline-secondary" type="button">Ver detalhes</button>
-                  </div>
+                  @if (
+                    item.applicationStatus === 'Approve' ||
+                    item.applicationStatus === 'New' ||
+                    item.applicationStatus === 'Closed'
+                  ) {
+                    <button
+                      class="btn btn-primary flex-grow-1"
+                      type="button"
+                      (click)="changeStatus(item.panCard, 'Reject')"
+                    >
+                      Rejeitar
+                    </button>
+                  }
+
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="showDetails(item.applicantID)"
+                    [attr.aria-expanded]="expandedCard === item.applicantID"
+                  >
+                    {{ expandedCard === item.applicantID ? 'Ocultar detalhes' : 'Ver detalhes' }}
+                  </button>
                 </div>
-              }
+              </div>
             </article>
           </div>
         }
