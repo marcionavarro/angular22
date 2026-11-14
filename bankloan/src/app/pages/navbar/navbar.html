@@ -17,22 +17,17 @@
         >Início</a
       >
 
-      <a
-        class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
-        routerLink="register-customer"
-      >
-        Registrar
-      </a>
-
-      @if (!loggedUserData()) {
+      @if (loggedUserData() != null) {
         <a
           class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
-          routerLink="login"
+          routerLink="/application-list"
         >
-          Login
+          Aplicação
         </a>
       }
+
       <a class="btn btn-primary rounded-pill px-4" routerLink="/login">Solicitar empréstimo</a>
+
       @if (loggedUserData(); as user) {
         <div class="d-flex align-items-center gap-2 border-start ps-3">
           <span class="small fw-semibold text-dark">{{ user?.userName }}</span>
@@ -44,6 +39,20 @@
             Sair
           </button>
         </div>
+      } @else {
+        <a
+          class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
+          routerLink="/login"
+        >
+          Login
+        </a>
+
+        <a
+          class="link-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
+          routerLink="/register-customer"
+        >
+          Registrar
+        </a>
       }
     </div>
   </div>

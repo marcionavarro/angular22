@@ -21,4 +21,20 @@ export class Master {
   saveLoanApplication(obj: ILoanApplication): Observable<IApiResponseModel> {
     return this.http.post<IApiResponseModel>(`${this.apiUrl}/AddNewApplication`, obj);
   }
+
+  getMyApplications(id: number): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>(`${this.apiUrl}/GetMyApplications?customerId=${id}`);
+  }
+
+  getAssignedApplications(id: number): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>(
+      `${this.apiUrl}/GetApplicationAssigneedToMe?bankEmployeeId=${id}`,
+    );
+  }
+
+  changeStatus(panNo: string, status: string): Observable<IApiResponseModel> {
+    return this.http.get<IApiResponseModel>(
+      `${this.apiUrl}/CheckApplicationStatus?panNo=${panNo}&status=${status}`,
+    );
+  }
 }
